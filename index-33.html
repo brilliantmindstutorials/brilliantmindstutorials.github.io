@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brilliant Minds Tutorials</title>
+<meta name="theme-color" content="#07503b">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Brilliant Minds">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%230b6b4f%22%2F%3E%3Cg%20stroke%3D%22%23f5a623%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M256%2062v30%22%2F%3E%3Cpath%20d%3D%22M150%20100l20%2024%22%2F%3E%3Cpath%20d%3D%22M362%20100l-20%2024%22%2F%3E%3Cpath%20d%3D%22M98%20190l30%2010%22%2F%3E%3Cpath%20d%3D%22M414%20190l-30%2010%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22262%22%20r%3D%22104%22%20fill%3D%22%23f5a623%22%2F%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22262%22%20r%3D%2270%22%20fill%3D%22%23ffd98a%22%2F%3E%3Crect%20x%3D%22212%22%20y%3D%22356%22%20width%3D%2288%22%20height%3D%2222%22%20rx%3D%2211%22%20fill%3D%22%23ffd98a%22%2F%3E%3Crect%20x%3D%22226%22%20y%3D%22384%22%20width%3D%2260%22%20height%3D%2220%22%20rx%3D%2210%22%20fill%3D%22%23ffd98a%22%2F%3E%3Cpath%20d%3D%22M120%20176L256%20118l136%2058-136%2058z%22%20fill%3D%22%23ffffff%22%2F%3E%3Cpath%20d%3D%22M196%20214v38c36%2024%2084%2024%20120%200v-38l-60%2026z%22%20fill%3D%22%23e3f4ec%22%2F%3E%3Cpath%20d%3D%22M392%20182v54%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%2210%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%22392%22%20cy%3D%22242%22%20r%3D%2210%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fsvg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<style>
+:root{--bg:#f4f9f6;--card:#fff;--ink:#10241c;--mut:#4f6359;--pri:#0b6b4f;--pri2:#07503b;--acc:#f5a623;--line:#d6e6dc;--err:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.55 Figtree,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--pri);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:5px solid var(--acc)}
+header b{font-size:22px}
+main{max-width:720px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:30px;line-height:1.2;margin:8px 0 12px}
+h2{font-size:21px;margin:28px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+label{display:block;font-weight:700;margin:12px 0 4px}
+input,textarea{width:100%;padding:11px;font:inherit;border:1px solid var(--line);border-radius:8px;background:#fff}
+input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:1px}
+button,.btn{font:inherit;font-weight:700;background:var(--pri);color:#fff;border:0;border-radius:8px;padding:11px 18px;cursor:pointer;margin-top:14px;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{background:var(--pri2)}
+button.ghost{background:transparent;color:#fff;border:1px solid #fff;margin:0;padding:7px 14px}
+button.del{background:#fff;color:var(--err);border:1px solid var(--err);padding:6px 12px;margin-top:10px}
+.link{background:none;color:var(--pri);padding:0;margin:0;text-decoration:underline}
+.msg{margin-top:12px;font-weight:700}.err{color:var(--err)}.ok{color:var(--pri)}
+.mut{color:var(--mut);font-size:15px}
+iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;margin-top:10px}
+.hide{display:none}
+.hero{padding:30px 0 10px}
+select{width:100%;padding:11px;font:inherit;border:1px solid var(--line);border-radius:8px;background:#fff}
+.chk{display:flex;gap:10px;align-items:center;font-weight:400;margin:0;padding:9px 10px;border:1px solid var(--line);border-radius:8px}
+.chk input{width:auto}
+.subs{display:grid;gap:6px;margin-top:4px}
+.prof{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:start}
+.prof img,.ph0{width:96px;height:120px;object-fit:cover;border-radius:10px;border:3px solid var(--acc)}
+.ph0{display:flex;align-items:center;justify-content:center;background:var(--pri);color:#fff;font-size:38px;font-weight:700}
+.prof dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px}
+.prof dt{color:var(--mut)}.prof dd{margin:0}
+.prof .full{grid-column:1/-1}
+.chip{display:inline-block;background:#e3f4ec;color:var(--pri2);border-radius:999px;padding:4px 12px;margin:8px 6px 0 0;font-size:15px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 12px}
+button.sec{background:#fff;color:var(--pri);border:1px solid var(--pri)}
+header{position:relative}
+.panel{position:absolute;right:12px;top:100%;margin-top:6px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);min-width:210px;padding:6px;z-index:10}
+.panel.hide{display:none}
+.panel button{display:block;width:100%;text-align:left;background:none;color:var(--ink);margin:0;padding:12px 14px;border-radius:8px}
+.panel button:hover{background:#e9f5ee}
+.panel hr{border:0;border-top:1px solid var(--line);margin:4px 0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.cta button{margin:0}
+.cta .alt{background:transparent;border:2px solid #fff}
+.who{display:flex;gap:16px;align-items:center}
+.who img{width:104px;height:104px;border-radius:50%;object-fit:cover;border:4px solid var(--acc);flex:none}
+.who h2{margin:0 0 4px}
+.note h2{margin-top:0}
+section[id]{scroll-margin-top:12px}
+.hero2{background:var(--pri);color:#fff;margin:-24px -16px 24px;padding:30px 22px 0;border-radius:0 0 28px 28px;overflow:hidden}
+.hero2 h1{font:700 35px/1.12 "Bricolage Grotesque",Georgia,sans-serif;margin:0 0 12px}
+.hero2 p{color:#d3efe2;margin:0;max-width:36ch}
+.hero2 svg{display:block;width:100%;max-width:380px;margin:10px auto 0}
+.feat{display:grid;gap:18px;margin:30px 0 0}
+.feat div{display:flex;gap:14px;align-items:flex-start}
+.feat svg{flex:none;width:46px;height:46px}
+.feat b{display:block;font-size:18px}
+
+/* ---- New look ---- */
+h1,h2,header b{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.01em}
+header{position:sticky;top:0;z-index:20;background:rgba(7,80,59,.96);backdrop-filter:blur(8px);border-bottom:4px solid var(--acc);box-shadow:0 4px 18px rgba(7,80,59,.25)}
+header b{font-size:21px;display:flex;align-items:center;gap:9px}
+header b:before{content:"";width:32px;height:32px;border-radius:9px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22%230b6b4f%22%2F%3E%3Cg%20stroke%3D%22%23f5a623%22%20stroke-width%3D%2216%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M256%2062v30%22%2F%3E%3Cpath%20d%3D%22M150%20100l20%2024%22%2F%3E%3Cpath%20d%3D%22M362%20100l-20%2024%22%2F%3E%3Cpath%20d%3D%22M98%20190l30%2010%22%2F%3E%3Cpath%20d%3D%22M414%20190l-30%2010%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22262%22%20r%3D%22104%22%20fill%3D%22%23f5a623%22%2F%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22262%22%20r%3D%2270%22%20fill%3D%22%23ffd98a%22%2F%3E%3Crect%20x%3D%22212%22%20y%3D%22356%22%20width%3D%2288%22%20height%3D%2222%22%20rx%3D%2211%22%20fill%3D%22%23ffd98a%22%2F%3E%3Crect%20x%3D%22226%22%20y%3D%22384%22%20width%3D%2260%22%20height%3D%2220%22%20rx%3D%2210%22%20fill%3D%22%23ffd98a%22%2F%3E%3Cpath%20d%3D%22M120%20176L256%20118l136%2058-136%2058z%22%20fill%3D%22%23ffffff%22%2F%3E%3Cpath%20d%3D%22M196%20214v38c36%2024%2084%2024%20120%200v-38l-60%2026z%22%20fill%3D%22%23e3f4ec%22%2F%3E%3Cpath%20d%3D%22M392%20182v54%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%2210%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%22392%22%20cy%3D%22242%22%20r%3D%2210%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat}
+.card{border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(11,107,79,.08)}
+.note{border-left:6px solid var(--acc)}
+button,.btn{border-radius:12px;padding:13px 22px;box-shadow:0 4px 12px rgba(11,107,79,.22);transition:transform .15s,background .15s}
+button:active,.btn:active{transform:scale(.97)}
+button.ghost,button.del,.link,.panel button{box-shadow:none}
+.cta button:not(.alt),.hero2 .cta button{background:var(--acc);color:#07503b}
+.cta button:not(.alt):hover{background:#ffc661}
+.cta .alt{border-radius:12px;color:#fff}
+input,textarea,select{border-radius:12px;padding:13px;border:1.5px solid var(--line)}
+input:focus,textarea:focus,select:focus{border-color:var(--pri);outline:3px solid rgba(245,166,35,.55)}
+.hero2{background:radial-gradient(circle at 85% 8%,rgba(245,166,35,.28),transparent 45%),linear-gradient(160deg,#0b6b4f 0%,#07503b 70%);padding:42px 24px 0;border-radius:0 0 40px 40px;box-shadow:0 14px 34px rgba(7,80,59,.25)}
+.hero2 h1{font-size:38px;line-height:1.08;font-weight:800;margin-bottom:14px}
+.hero2 p{font-size:18px;max-width:34ch}
+.feat{gap:14px}
+.feat div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 22px rgba(11,107,79,.07)}
+.who img{border-color:var(--acc);box-shadow:0 6px 18px rgba(7,80,59,.25)}
+.chip{background:#e3f4ec;font-weight:600}
+@media(min-width:760px){main{max-width:900px}.hero2{margin:-24px -16px 28px;padding:56px 48px 0;display:grid;grid-template-columns:1.1fr 1fr;align-items:end;column-gap:30px}.hero2 h1{font-size:50px}.hero2 svg{grid-column:2;grid-row:1/4;margin:0}.feat{grid-template-columns:repeat(3,1fr)}.feat div{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 22px}
+.role{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;margin:0;padding:22px 10px;border-radius:22px;background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:0 10px 26px rgba(11,107,79,.1)}
+.role:hover{background:#eaf6ef;transform:translateY(-3px)}
+.role svg{width:68px;height:68px}
+.role b{font:800 20px "Bricolage Grotesque",sans-serif}
+.role span{font-weight:400;font-size:14px;color:var(--mut)}
+.role.s{border-color:var(--pri)}.role.t{border-color:var(--acc)}
+.rp.s{border-top:8px solid var(--pri)}.rp.t{border-top:8px solid var(--acc);background:#fffdf6}.rp.l{border-top:8px solid var(--line)}
+button.back{display:block;margin:0 0 14px;font-weight:700;text-decoration:none}
+@media(min-width:760px){.roles{max-width:560px;margin-left:auto;margin-right:auto}}
+.livebadge{background:#b3261e;color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:3px 11px;white-space:nowrap}
+.livebtns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.livebtns button,.livebtns .btn{margin-top:10px}
+
+/* ---- v3: new look, portals ---- */
+.hero3{background:radial-gradient(circle at 88% 6%,rgba(245,166,35,.32),transparent 46%),linear-gradient(160deg,#0b6b4f 0%,#07503b 72%);color:#fff;margin:-24px -16px 22px;padding:34px 22px 0;border-radius:0 0 40px 40px;box-shadow:0 14px 34px rgba(7,80,59,.28);overflow:hidden}
+.hero3 .pill{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700}
+.hero3 h1{font:800 38px/1.08 "Bricolage Grotesque",Georgia,sans-serif;margin:16px 0 12px}
+.hero3 p{color:#d3efe2;font-size:18px;max-width:34ch;margin:0}
+.cta2{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+.cta2 button{margin:0;background:var(--acc);color:#07503b}
+.cta2 button:hover{background:#ffc661}
+.cta2 button.alt{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none}
+.hero3 svg{display:block;width:100%;max-width:360px;margin:14px auto 0}
+.portals{display:grid;gap:14px;margin-bottom:8px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 10px 28px rgba(11,107,79,.1)}
+.pcard.s{border-top:8px solid var(--pri)}.pcard.t{border-top:8px solid var(--acc)}
+.pcard h2{margin:10px 0 6px}
+.pcard ul{padding-left:20px;margin:10px 0 0}
+.pcard button{width:100%;margin-top:16px}
+.pcard.t button{background:var(--acc);color:#07503b}
+.pcard.t button:hover{background:#ffc661}
+.sectitle{margin:30px 0 12px}
+.feat{grid-template-columns:1fr}
+.steps{display:grid;gap:12px;counter-reset:st}
+.steps div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 16px 16px 62px;position:relative}
+.steps div:before{counter-increment:st;content:counter(st);position:absolute;left:14px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--pri);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.foot{text-align:center;color:var(--mut);font-size:14px;margin-top:30px}
+.pbanner{border-radius:24px;padding:20px;color:#fff;margin-bottom:14px;display:flex;gap:14px;align-items:center;box-shadow:0 12px 28px rgba(7,80,59,.2)}
+.pbanner.s{background:linear-gradient(160deg,#0b6b4f,#07503b)}
+.pbanner.t{background:linear-gradient(160deg,#f5a623,#d98a0b);color:#2b1a00}
+.pbanner svg{width:62px;height:62px;flex:none}
+.pbanner h1{margin:0;font-size:26px}
+.pbanner p{margin:4px 0 0;font-size:15px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#e3f4ec;border-radius:14px;padding:4px;margin-bottom:12px}
+.tabs button{margin:0;background:transparent;color:var(--pri2);box-shadow:none;border-radius:11px;padding:11px 8px}
+.tabs button.on{background:var(--pri);color:#fff;box-shadow:0 4px 12px rgba(11,107,79,.25)}
+.tabs.t{background:#fdf0d3}
+.tabs.t button{color:#6b4300}
+.tabs.t button.on{background:var(--acc);color:#2b1a00}
+@media(min-width:760px){
+  .hero3{margin:-24px -16px 28px;padding:56px 48px 0;display:grid;grid-template-columns:1.1fr 1fr;align-items:end;column-gap:30px}
+  .hero3 h1{font-size:50px}
+  .hero3 svg{grid-column:2;grid-row:1/5;margin:0}
+  .portals{grid-template-columns:1fr 1fr}
+  .feat{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .steps div{padding:64px 16px 16px}.steps div:before{left:16px;top:16px}
+}
+.bar{height:12px;background:#e3f4ec;border-radius:999px;overflow:hidden;margin-top:10px}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--pri),var(--acc));border-radius:999px;transition:width .4s}
+.card.isdone{border-color:var(--pri);box-shadow:0 10px 30px rgba(11,107,79,.14)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:10px 0 4px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 8px 22px rgba(11,107,79,.07)}
+.stat b{display:block;font:800 30px "Bricolage Grotesque",sans-serif;color:var(--pri)}.stat span{color:var(--mut);font-size:15px}
+dl.mini{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px}.mini dt{color:var(--mut)}.mini dd{margin:0}
+@media(min-width:760px){.stats{grid-template-columns:repeat(5,1fr)}}
+.bad{border-color:#b3261e !important;box-shadow:0 0 0 3px rgba(179,38,30,.16)}
+.subs.bad{border-radius:16px;outline:2px solid #b3261e;outline-offset:3px}
+
+/* ---- Chat, search, sub navigation ---- */
+#subnav{max-width:720px;margin:0 auto;padding:14px 16px 0}
+@media(min-width:760px){#subnav{max-width:900px}}
+#subnav .tabs{margin-bottom:0}
+.tabs.three{grid-template-columns:repeat(3,1fr)}
+.rooms{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px}
+.rooms button{margin:0;padding:8px 16px;border-radius:999px;background:#fff;color:var(--pri2);border:1.5px solid var(--line);box-shadow:none;white-space:nowrap}
+.rooms button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.chatcard{padding:12px}
+.chat{height:min(58vh,520px);overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:6px 4px}
+.bub{max-width:88%;align-self:flex-start;background:#f0f6f3;border-radius:16px 16px 16px 4px;padding:9px 13px}
+.bub.me{align-self:flex-end;background:#e3f4ec;border-radius:16px 16px 4px 16px}
+.bh{display:flex;gap:12px;justify-content:space-between;align-items:baseline;font-size:14px}
+.bh span{color:var(--mut);font-size:12px}
+.bt{white-space:pre-wrap;overflow-wrap:anywhere}
+.ba{display:flex;gap:14px;margin-top:2px}
+.ba .link{font-size:13px;color:var(--mut)}
+.chatin{display:flex;gap:8px;align-items:flex-end;margin-top:10px}
+.chatin textarea{flex:1;resize:none;max-height:120px}
+.chatin button{margin:0}
+.wk{display:flex;gap:14px;align-items:flex-start}
+.wk img{width:84px;height:84px;object-fit:cover;border-radius:12px;flex:none}
+.chatin input{flex:1;min-width:0}
+.tabs.four{grid-template-columns:repeat(4,1fr)}
+.tabs.four button{padding:11px 4px;font-size:15px}
+.tabs.five{grid-template-columns:repeat(5,1fr)}.tabs.five button{padding:11px 2px;font-size:14px}
+.qb{border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0;background:#f7fbf9}
+.ans{white-space:pre-wrap;background:#f4f9f6;border-radius:8px;padding:8px;margin:6px 0}
+.opt2{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1.5px solid var(--line);margin-top:10px}.opt2:hover{background:#eef7f2}.opt2.good,.opt2.good:hover{background:#d9f2e4;border-color:var(--pri)}.opt2.bad,.opt2.bad:hover{background:#fde3e1;border-color:var(--err)}
+.opt2.sel,.opt2.sel:hover{background:#fdf0d3;border-color:var(--acc)}
+.mockbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:8px 12px;margin-bottom:10px}
+.mockbar b{font-size:22px;color:var(--pri2);font-variant-numeric:tabular-nums}.mockbar b.low{color:var(--err)}
+.mockbar button{margin:0;padding:9px 16px}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}
+.pal button{margin:0;padding:10px 0;background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+.pal button.done{background:#d9f2e4;border-color:var(--pri)}
+.pal button.cur{outline:3px solid var(--acc)}
+.mnav{display:flex;gap:10px;margin-top:12px}.mnav button{margin:0;flex:1}
+.mbar{height:10px;background:#e3f4ec;border-radius:6px;overflow:hidden;margin-top:6px}.mbar i{display:block;height:100%;background:var(--pri)}
+.ckrow{display:flex;align-items:center;gap:10px;margin:8px 0}.ckrow input{width:auto;margin:0}
+.mrev{border-top:1px solid var(--line);padding:12px 0}
+.tabs.pt button{font-size:13px;padding:11px 1px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);background:var(--pri2);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;z-index:50}#toast.show{opacity:1;transform:translateX(-50%)}
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.rstats div{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 4px;text-align:center;font-size:15px}.rstats b{display:block;font-size:26px;color:var(--pri2)}
+.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.badge{background:#fff;border:1.5px solid var(--acc);border-radius:14px;padding:10px;text-align:center;font-size:16px}.badge span{display:block;font-size:30px}.badge.off{opacity:.4;filter:grayscale(1);border-color:var(--line)}
+.cert{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--acc);border-radius:14px;padding:12px;margin-top:8px}.cert.off{opacity:.55;border-color:var(--line)}.cert .ci{font-size:34px}.cert .ct{flex:1;min-width:0}.cert button{margin:0;width:auto;padding:10px 14px;font-size:14px}.cert .bar{height:8px;background:#e3f4ec;border-radius:6px;overflow:hidden;margin-top:6px}.cert .bar i{display:block;height:100%;background:var(--pri)}
+.ann{border-color:var(--acc)}.ann h3{margin:0 0 4px;font:800 18px "Bricolage Grotesque",sans-serif}.ann p{margin:6px 0;white-space:pre-wrap}.ann .meta{font-size:13px;color:var(--mut)}
+.tt{display:flex;gap:12px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;margin-top:8px}.tt .tm{min-width:108px;font-weight:700;color:var(--pri2);font-size:14px}.tt .ti{flex:1;min-width:0}.tt.today{border-color:var(--acc)}.tt button.link{margin:0}
+.lb{display:flex;align-items:center;gap:10px;padding:10px 6px;border-bottom:1px solid var(--line)}.lb.me{background:#fdf0d3;border-radius:10px}.lb .rk{width:36px;font-weight:700}.lb .nm{flex:1;min-width:0}.lb small{display:block;color:var(--mut);font-size:14px}
+.opt{display:flex;gap:8px;align-items:center;font-weight:400;margin:8px 0}.opt input{width:auto}
+.abt{text-align:center}
+.abt .logo{width:112px;height:112px;border-radius:26px;box-shadow:0 10px 26px rgba(7,80,59,.28)}
+.ticks{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.ticks li{padding-left:30px;position:relative}
+.ticks li:before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.5l3 3 5-6' fill='none' stroke='%2307503b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center no-repeat}
+</style>
+</head>
+<body>
+<header><b>Brilliant Minds</b><div id="nav"></div></header>
+<div id="subnav"></div>
+<main id="app"></main>
+
+<script>
+let RECOVERY = /[#&?]type=recovery/.test(location.hash + location.search);
+const LINK_ERR = /error_code=|error=access_denied/.test(location.hash);
+let linkErrShown = false;
+const sb = supabase.createClient(
+  "https://jsfeeujafpossnifesuz.supabase.co",
+  "sb_publishable_GsNZ-7XLNyf2kQ_qnkc8Dg_0kcEuZKP"
+);
+const app = document.getElementById("app");
+const nav = document.getElementById("nav");
+const subnav = document.getElementById("subnav");
+let me = null, chatStop = null, chatRoom = "General";
+/* Paste your Google Programmable Search Engine ID between the quotes to switch on web search */
+const CSE_ID = "75fb55fa0f14e4f3b";
+sb.auth.onAuthStateChange(ev => { if(ev === "PASSWORD_RECOVERY"){ RECOVERY = true; showNewPassword(); } });
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function embed(url){
+  if(!url) return "";
+  const m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+  if(m) return `<iframe src="https://www.youtube.com/embed/${m[1]}" allowfullscreen title="Lesson video"></iframe>`;
+  return `<p><a href="${esc(url)}" target="_blank" rel="noopener">Open video</a></p>`;
+}
+
+/* ---------- Logged-out screens ---------- */
+const PHOTO = "data:image/jpeg;base64,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";
+function say(text, bad){
+  const el = document.getElementById("m");
+  if(!el) return;
+  el.textContent = text;
+  el.className = "msg " + (bad ? "err" : "ok");
+}
+function go(id){ const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:"smooth"}); }
+const STUDENT_ICON = `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#e3f4ec"/><path d="M8 25l24-11 24 11-24 11z" fill="#0b6b4f"/><path d="M18 33v10c8 7 20 7 28 0V33l-14 6z" fill="#07503b"/><path d="M54 27v14" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/></svg>`;
+const TEACHER_ICON = `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fdf0d3"/><rect x="10" y="14" width="44" height="28" rx="4" fill="#0b6b4f"/><path d="M18 24h20M18 31h13" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="45" cy="30" r="5" fill="#f5a623"/><path d="M24 50h16M32 42v8" stroke="#07503b" stroke-width="3.5" stroke-linecap="round"/></svg>`;
+function openPortal(role){
+  if(location.hash === "#" + role) showAuth("login", role); else location.hash = "#" + role;
+}
+function routeOut(){
+  const h = location.hash;
+  if(h === "#student") return showAuth("login", "student");
+  if(h === "#teacher") return showAuth("login", "teacher");
+  showHome();
+}
+window.addEventListener("hashchange", async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session) routeOut();
+});
+function homeMenu(){
+  nav.innerHTML = `<button class="ghost" id="mb" aria-expanded="false" aria-controls="mp">Menu</button>
+  <div class="panel hide" id="mp" role="menu">
+    <button data-a="top">Home</button>
+    <button data-a="student">Student portal</button>
+    <button data-a="teacher">Teacher portal</button>
+    <button data-a="chat">Chatrooms</button>
+    <button data-a="search">Search</button>
+    <button data-a="about">About us</button>
+    <hr>
+    <button data-a="welcome">Welcome note</button>
+    <button data-a="contact">Contact us</button>
+  </div>`;
+  const mp = document.getElementById("mp"), mb = document.getElementById("mb");
+  const close = () => { mp.classList.add("hide"); mb.setAttribute("aria-expanded","false"); };
+  mb.onclick = e => { e.stopPropagation(); const open = mp.classList.toggle("hide") === false; mb.setAttribute("aria-expanded", open); };
+  mp.onclick = e => { const a = e.target.dataset.a; if(!a) return; close();
+    if(a === "top"){ showHome(); window.scrollTo(0,0); }
+    else if(a === "student" || a === "teacher") openPortal(a);
+    else if(a === "chat") showChatGate();
+    else if(a === "search") showSearch();
+    else if(a === "about") showAbout();
+    else if(!document.getElementById(a)){ showHome(); setTimeout(() => go(a), 60); } else go(a); };
+  document.addEventListener("click", close);
+}
+function showHome(){
+  leaveChat(); subnav.innerHTML = ""; me = null;
+  if(location.hash) history.replaceState(null, "", location.pathname + location.search);
+  homeMenu();
+  window.scrollTo(0, 0);
+  app.innerHTML = `
+  <section class="hero3" id="top">
+    <span class="pill">JAMB · WAEC / NECO · SSS1 to SSS3</span>
+    <h1>Learn with confidence.<br>Teach with purpose.</h1>
+    <p>Brilliant Minds Tutorials brings video lessons, free notes and live classes to every student, on any phone.</p>
+    <div class="cta2"><button id="hs">Student portal</button><button id="ht" class="alt">Teacher portal</button></div>
+    <div id="instrow" class="hide" style="margin-top:12px"><div class="cta2" style="margin-top:0"><button id="ia" class="alt">📲 Install app</button></div><p id="instmsg" class="hide" style="font-size:15px;margin-top:10px"></p></div>
+    <svg viewBox="0 0 360 210" role="img" aria-label="An open book with a bright light rising from its pages">
+      <g stroke="#f5a623" stroke-width="4" stroke-linecap="round"><path d="M180 12v22M120 30l12 18M240 30l-12 18M80 70l18 10M280 70l-18 10"/></g>
+      <circle cx="180" cy="86" r="34" fill="#f5a623"/><circle cx="180" cy="86" r="22" fill="#ffd98a"/>
+      <path d="M170 112h20v10h-20z" fill="#f5a623"/>
+      <path d="M20 196c60-24 120-24 160 0 40-24 100-24 160 0V122c-60-22-120-22-160 6-40-28-100-28-160-6z" fill="#fff"/>
+      <path d="M180 128v68" stroke="#0b6b4f" stroke-width="4"/>
+      <path d="M44 140c40-10 80-8 120 8M196 148c40-16 80-18 120-8" stroke="#a9d6c3" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M44 158c40-10 80-8 120 8M196 166c40-16 80-18 120-8" stroke="#a9d6c3" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
+  </section>
+
+  <section class="card" id="askbox" style="margin-bottom:18px"><b style="font-size:18px">Ask anything</b>
+    <div class="chatin" style="margin-top:8px"><input id="hq" type="search" placeholder="e.g. What is photosynthesis?" aria-label="Ask a question"><button id="hqb">Search</button></div></section>
+
+  <section class="portals" aria-label="Choose your portal">
+    <div class="pcard s">${STUDENT_ICON.replace("<svg", '<svg width="64" height="64"')}
+      <h2>Student portal</h2>
+      <p class="mut" style="margin:0">Log in or create your free account to learn at your own pace.</p>
+      <ul><li>Watch lessons from your teachers</li><li>Join live classes for your study group</li><li>Download notes and materials</li></ul>
+      <button id="ps">Enter student portal</button></div>
+    <div class="pcard t">${TEACHER_ICON.replace("<svg", '<svg width="64" height="64"')}
+      <h2>Teacher portal</h2>
+      <p class="mut" style="margin:0">Log in, or apply to teach. We review every application.</p>
+      <ul><li>Post videos, notes and documents</li><li>Teach live by video, audio or both</li><li>Reach learners wherever they are</li></ul>
+      <button id="pt">Enter teacher portal</button></div>
+  </section>
+
+  <h2 class="sectitle">What you get</h2>
+  <div class="feat">
+    <div><svg viewBox="0 0 46 46" aria-hidden="true"><rect width="46" height="46" rx="12" fill="#f5a623"/><rect x="9" y="12" width="28" height="20" rx="4" fill="#0b6b4f"/><path d="M20 17l9 5-9 5z" fill="#fff"/><path d="M16 36h14" stroke="#0b6b4f" stroke-width="3" stroke-linecap="round"/></svg><span><b>Watch lessons</b><span class="mut">Video lessons from your teachers, ready whenever you are.</span></span></div>
+    <div><svg viewBox="0 0 46 46" aria-hidden="true"><rect width="46" height="46" rx="12" fill="#f5a623"/><rect x="8" y="14" width="22" height="18" rx="4" fill="#0b6b4f"/><path d="M30 20l8-5v16l-8-5z" fill="#0b6b4f"/><circle cx="14" cy="19" r="2.5" fill="#fff"/></svg><span><b>Live classes</b><span class="mut">Join your teacher by video or audio. On a phone, install the free Jitsi Meet app first.</span></span></div>
+    <div><svg viewBox="0 0 46 46" aria-hidden="true"><rect width="46" height="46" rx="12" fill="#f5a623"/><path d="M23 10v16m0 0l-7-7m7 7l7-7" stroke="#0b6b4f" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 33h24" stroke="#0b6b4f" stroke-width="3.5" stroke-linecap="round"/></svg><span><b>Download materials</b><span class="mut">PDFs, notes and images saved to your phone for offline study.</span></span></div>
+    <div><svg viewBox="0 0 46 46" aria-hidden="true"><rect width="46" height="46" rx="12" fill="#f5a623"/><rect x="14" y="8" width="18" height="30" rx="4" fill="#0b6b4f"/><circle cx="23" cy="32" r="2" fill="#fff"/><path d="M18 14h10" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg><span><b>Learn on any phone</b><span class="mut">Nothing to install for lessons. Open the link and log in.</span></span></div>
+  </div>
+
+  <h2 class="sectitle">How it works</h2>
+  <div class="steps">
+    <div><b>Create your account</b><span class="mut" style="display:block">Pick the student or teacher portal and sign up in a minute.</span></div>
+    <div><b>Find your class</b><span class="mut" style="display:block">See lessons and live classes made for your study group.</span></div>
+    <div><b>Learn and grow</b><span class="mut" style="display:block">Watch, join live, download notes, and learn a little each day.</span></div>
+  </div>
+
+  <section class="card" id="welcome" style="margin-top:26px"><div class="who"><img src="${PHOTO}" alt="Oluwapelumi Samuel Oyepeju, founder of Brilliant Minds Tutorials"><div>
+    <h2>Welcome</h2><p style="margin:0">Whether you want to learn or to teach, there is a place for you here. Take your time, ask questions, and grow.</p>
+    <div><b>Oluwapelumi Samuel Oyepeju</b></div><div class="mut">Founder, Brilliant Minds Tutorials</div></div></div></section>
+
+  <section class="card note" id="contact"><h2>Contact us</h2>
+    <p style="margin-top:0">Questions about joining, or want to teach with us? Talk to us directly.</p>
+    <div class="cta" style="margin-top:6px"><a class="btn" style="margin:0" href="https://wa.me/2349134192598" target="_blank" rel="noopener">WhatsApp</a><a class="btn" style="margin:0" href="mailto:oluwapelumisamuel319@gmail.com">Email</a></div></section>
+
+  <p class="foot"><button class="link" id="abt">About us</button> · © Brilliant Minds Tutorials</p>`;
+  document.getElementById("abt").onclick = showAbout;
+  document.getElementById("hqb").onclick = () => showSearch(document.getElementById("hq").value.trim());
+  document.getElementById("hq").onkeydown = e => { if(e.key === "Enter") showSearch(e.target.value.trim()); };
+  hs.onclick = ps.onclick = () => openPortal("student");
+  ht.onclick = pt.onclick = () => openPortal("teacher");
+  wireInstall();
+}
+const SUBJECTS = ["Mathematics","English Language","Physics","Chemistry","Biology","Economics","Government","Literature in English","Further Mathematics","Computer Studies","Geography","Agricultural Science","Civic Education","Commerce","Accounting"];
+const GROUPS = [["Exam tutorials", ["JAMB", "WAEC / NECO"]], ["Senior secondary school class", ["SSS1", "SSS2", "SSS3"]]];
+function groupField(cur){
+  return `<label for="sg">What are you studying for?</label><select id="sg"><option value="">Choose…</option>${GROUPS.map(([g, o]) => `<optgroup label="${g}">${o.map(x => `<option${cur === x ? " selected" : ""}>${x}</option>`).join("")}</optgroup>`).join("")}</select>`;
+}
+function detailFields(v = {}, subLabel = "Subjects (choose all that apply)", group = false){
+  const subs = v.subjects || [];
+  return `
+  <label for="ph">Phone number</label><input id="ph" type="tel" autocomplete="tel" value="${esc(v.phone)}">
+  <label for="ag">Age</label><input id="ag" type="number" min="3" max="100" inputmode="numeric" value="${esc(v.age)}">
+  <label for="sx">Sex</label><select id="sx"><option value="">Choose…</option><option${v.sex === "Male" ? " selected" : ""}>Male</option><option${v.sex === "Female" ? " selected" : ""}>Female</option></select>
+  <label for="ad">Address</label><textarea id="ad" rows="2" autocomplete="street-address">${esc(v.address)}</textarea>
+  ${group ? groupField(v.study_group) : ""}
+  <label>${subLabel}</label>
+  <div class="subs">${SUBJECTS.map(x => `<label class="chk"><input type="checkbox" name="sub" value="${esc(x)}"${subs.includes(x) ? " checked" : ""}> ${esc(x)}</label>`).join("")}</div>
+  <label for="pf">Passport photograph (optional)</label><input id="pf" type="file" accept="image/*">`;
+}
+function readDetails(){
+  const d = { phone: ph.value.trim(), age: parseInt(ag.value, 10), sex: sx.value, address: ad.value.trim(),
+    subjects: [...document.querySelectorAll('input[name="sub"]:checked')].map(c => c.value) };
+  const sg = document.getElementById("sg");
+  if(sg){ if(!sg.value) return null; d.study_group = sg.value; }
+  return (!d.phone || !(d.age >= 3 && d.age <= 100) || !d.sex || !d.address || !d.subjects.length) ? null : d;
+}
+function teacherFields(v = {}){
+  return `
+  <label for="inst">School or institution attended</label><input id="inst" value="${esc(v.institution)}">
+  <label for="qual">Qualification and course</label><input id="qual" placeholder="e.g. B.Sc. Mathematics Education" value="${esc(v.qualification)}">
+  <label for="grd">Grade or class of degree</label><input id="grd" placeholder="e.g. Second Class Upper" value="${esc(v.grade)}">
+  <label for="cf">Photo of your certificate (optional)</label><input id="cf" type="file" accept="image/*">`;
+}
+function readTeacher(){
+  const r = { institution: inst.value.trim(), qualification: qual.value.trim(), grade: grd.value.trim() };
+  return (!r.institution || !r.qualification || !r.grade) ? null : r;
+}
+async function shrink(file, side = 480){
+  const bmp = await createImageBitmap(file), r = Math.min(1, side / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas"); c.width = Math.round(bmp.width * r); c.height = Math.round(bmp.height * r);
+  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+  return new Promise(res => c.toBlob(res, "image/jpeg", 0.85));
+}
+async function saveDetails(user, d, file, cert){
+  const upd = { ...d };
+  if(file){
+    try{
+      const path = `${user.id}/passport.jpg`;
+      const up = await sb.storage.from("avatars").upload(path, await shrink(file), { upsert: true, contentType: "image/jpeg" });
+      if(up.error) return up.error.message;
+      upd.photo_path = path;
+    }catch(e){ return "Could not read that photo. Try a different image."; }
+  }
+  if(cert){
+    try{
+      const path = `${user.id}/certificate.jpg`;
+      const up = await sb.storage.from("avatars").upload(path, await shrink(cert, 1400), { upsert: true, contentType: "image/jpeg" });
+      if(up.error) return up.error.message;
+      upd.certificate_path = path;
+    }catch(e){ return "Could not read that certificate photo. Try a different image."; }
+  }
+  if(!Object.keys(upd).length) return null;
+  const { error } = await sb.from("profiles").update(upd).eq("id", user.id);
+  return error ? error.message : null;
+}
+function showAuth(mode, role){
+  leaveChat(); subnav.innerHTML = ""; me = null;
+  role = role || (mode === "teacher" ? "teacher" : "student");
+  homeMenu();
+  const su = mode !== "login", tch = role === "teacher";
+  const signMode = tch ? "teacher" : "signup";
+  window.scrollTo(0, 0);
+  app.innerHTML = `<button class="link back" id="bk">← Back to home</button>
+  <section class="pbanner ${tch ? "t" : "s"}">${tch ? TEACHER_ICON : STUDENT_ICON}<div><h1>${tch ? "Teacher portal" : "Student portal"}</h1>
+    <p>${tch ? "Share lessons and teach live. We review every application before a teacher account is activated." : "Lessons, notes and live classes, all in one place."}</p></div></section>
+  <div class="tabs ${tch ? "t" : ""}" role="tablist"><button id="tl" class="${su ? "" : "on"}" role="tab">Log in</button><button id="ts" class="${su ? "on" : ""}" role="tab">${tch ? "Apply to teach" : "Sign up"}</button></div>
+  <section class="card" id="box"></section>`;
+  document.getElementById("bk").onclick = () => { if(location.hash) location.hash = ""; else showHome(); };
+  document.getElementById("tl").onclick = () => showAuth("login", role);
+  document.getElementById("ts").onclick = () => showAuth(signMode, role);
+  document.getElementById("box").innerHTML = `
+  <h2 style="margin-top:0">${!su ? "Welcome back" : tch ? "Apply to teach with us" : "Create your student account"}</h2>
+  ${su ? `<label for="nm">Full name</label><input id="nm" autocomplete="name">` : ""}
+  <label for="em">Email</label><input id="em" type="email" autocomplete="email">
+  <label for="pw">Password ${su ? "(at least 6 characters)" : ""}</label>
+  <input id="pw" type="password" autocomplete="${su ? "new-password" : "current-password"}">
+  ${su ? detailFields({}, tch ? "Subjects you can teach" : undefined, !tch) : ""}
+  ${tch && su ? teacherFields() : ""}
+  <button id="go">${!su ? "Log in" : tch ? "Send my application" : "Sign up"}</button>
+  <div class="msg" id="m" role="status"></div>
+  ${!su ? `<div style="margin-top:14px"><button class="link" id="fp">Forgot your password?</button></div>` : ""}`;
+  document.getElementById("go").onclick = () => su ? signUp(mode) : logIn();
+  if(!su) document.getElementById("fp").onclick = () => showForgot(role);
+}
+function showForgot(role, note){
+  leaveChat(); subnav.innerHTML = ""; me = null;
+  homeMenu();
+  window.scrollTo(0, 0);
+  app.innerHTML = `<button class="link back" id="fgB">← Back to log in</button>
+  <section class="card"><h2 style="margin-top:0">Reset your password</h2>
+    ${note ? `<p class="msg err" style="margin-top:0">${esc(note)}</p>` : ""}
+    <p class="mut" style="margin-top:0">Enter the email you signed up with. We will send you a link to choose a new password.</p>
+    <label for="fe">Email</label><input id="fe" type="email" autocomplete="email">
+    <button id="fs">Send reset link</button><div class="msg" id="m" role="status"></div></section>`;
+  document.getElementById("fgB").onclick = () => showAuth("login", role);
+  document.getElementById("fs").onclick = async () => {
+    const email = document.getElementById("fe").value.trim();
+    if(!email || !email.includes("@")) return say("Enter your email address.", true);
+    const b = document.getElementById("fs");
+    b.disabled = true; say("Sending…");
+    const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname });
+    b.disabled = false;
+    if(error) return say(/rate|limit/i.test(error.message) ? "Too many requests right now. Please wait a few minutes and try again." : error.message, true);
+    say("If that email has an account, a reset link is on its way. Check your inbox and your spam folder.");
+  };
+}
+function showNewPassword(){
+  leaveChat(); subnav.innerHTML = ""; me = null; nav.innerHTML = "";
+  window.scrollTo(0, 0);
+  app.innerHTML = `<section class="card" style="margin-top:10px"><h2 style="margin-top:0">Choose a new password</h2>
+    <label for="np1">New password (at least 6 characters)</label><input id="np1" type="password" autocomplete="new-password">
+    <label for="np2">Type it again</label><input id="np2" type="password" autocomplete="new-password">
+    <button id="npb">Save new password</button><div class="msg" id="m" role="status"></div></section>`;
+  document.getElementById("npb").onclick = async () => {
+    const a = document.getElementById("np1").value, c = document.getElementById("np2").value;
+    if(a.length < 6) return say("Use at least 6 characters.", true);
+    if(a !== c) return say("The two passwords do not match.", true);
+    say("Saving…");
+    const { error } = await sb.auth.updateUser({ password: a });
+    if(error) return say(error.message, true);
+    RECOVERY = false;
+    say("Password changed. Taking you in…");
+    setTimeout(() => start(), 1200);
+  };
+}
+function showApplied(name, email){
+  nav.innerHTML = `<button class="ghost" id="out">Log out</button>`;
+  document.getElementById("out").onclick = async () => { await sb.auth.signOut(); showHome(); };
+  window.scrollTo(0, 0);
+  app.innerHTML = `<section class="card" style="text-align:center;padding:30px 20px">
+    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#0b6b4f"/><path d="M19 33l9 9 17-19" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1 style="margin-top:14px">Application sent</h1>
+    <p>Thank you, ${esc(name)}. We have received your teacher application and it is now <b>under review</b>.</p>
+    <p class="mut">We will email ${esc(email)} to confirm, and again once your application is approved.</p>
+    <button id="ok">Go to my page</button></section>`;
+  document.getElementById("ok").onclick = () => start("page");
+}
+function checkSignup(tch){
+  const need = [];
+  const add = (label, el, bad) => { if(!el) return; el.classList.toggle("bad", !!bad); if(bad) need.push([label, el]); };
+  add("Full name", document.getElementById("nm"), !document.getElementById("nm").value.trim());
+  add("Email", document.getElementById("em"), !document.getElementById("em").value.trim());
+  add("Password (6 or more characters)", document.getElementById("pw"), document.getElementById("pw").value.length < 6);
+  add("Phone number", document.getElementById("ph"), !document.getElementById("ph").value.trim());
+  const age = parseInt(document.getElementById("ag").value, 10);
+  add("Age", document.getElementById("ag"), !(age >= 3 && age <= 100));
+  add("Sex", document.getElementById("sx"), !document.getElementById("sx").value);
+  add("Address", document.getElementById("ad"), !document.getElementById("ad").value.trim());
+  const sg = document.getElementById("sg");
+  if(sg) add("What you are studying for", sg, !sg.value);
+  const box = document.querySelector(".subs");
+  if(box){ const none = !document.querySelector('input[name="sub"]:checked'); box.classList.toggle("bad", none); if(none) need.push(["At least one subject", box]); }
+  if(tch){
+    add("School or institution", document.getElementById("inst"), !document.getElementById("inst").value.trim());
+    add("Qualification and course", document.getElementById("qual"), !document.getElementById("qual").value.trim());
+    add("Grade or class of degree", document.getElementById("grd"), !document.getElementById("grd").value.trim());
+  }
+  return need;
+}
+document.addEventListener("input", e => {
+  if(e.target.classList) e.target.classList.remove("bad");
+  const b = e.target.closest && e.target.closest(".subs");
+  if(b) b.classList.remove("bad");
+});
+async function signUp(mode){
+  const tch = mode === "teacher";
+  const miss = checkSignup(tch);
+  if(miss.length){
+    say("Please complete: " + miss.map(m => m[0]).join(", ") + ".", true);
+    const el = miss[0][1];
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    if(el.tagName !== "DIV") el.focus({ preventScroll: true });
+    return;
+  }
+  const name = nm.value.trim(), email = em.value.trim(), password = pw.value, d = readDetails(), tf = tch ? readTeacher() : {};
+  if(!name || !email || password.length < 6 || !d || !tf) return say(tch
+    ? "Fill in every field: name, email, password (6+ characters), phone, age, sex, address, subjects, school, qualification and grade."
+    : "Enter your name, email, a password of 6+ characters, phone, age, sex, address, what you are studying for (JAMB, WAEC / NECO, SSS1, SSS2 or SSS3), and at least one subject.", true);
+  say("Creating account…");
+  const extra = tch ? { ...tf, teacher_applied: true } : {};
+  const { data, error } = await sb.auth.signUp({ email, password, options: { data: { full_name: name, name, ...d, ...extra } } });
+  if(error) return say(error.message, true);
+  if(!data.session) return say("Account created. Check your email to confirm, then log in.");
+  await getProfile(data.user);
+  if(pf.files[0] || (tch && cf.files[0])) await saveDetails(data.user, {}, pf.files[0], tch ? cf.files[0] : null);
+  if(tch) return showApplied(name, email);
+  start();
+}
+async function logIn(){
+  say("Logging in…");
+  const { error } = await sb.auth.signInWithPassword({ email: em.value.trim(), password: pw.value });
+  if(error) return say(error.message, true);
+  start();
+}
+
+/* ---------- Logged-in screens ---------- */
+async function getProfile(user){
+  let { data } = await sb.from("profiles").select("*").eq("id", user.id).maybeSingle();
+  if(!data){
+    const full_name = user.user_metadata?.full_name || user.email;
+    await sb.from("profiles").insert({ id: user.id, name: full_name, role: "student" });
+    ({ data } = await sb.from("profiles").select("*").eq("id", user.id).maybeSingle());
+  }
+  const m = user.user_metadata || {};
+  if(data && !data.phone && m.phone){
+    await saveDetails(user, { phone: m.phone, age: Number(m.age) || null, sex: m.sex || null, address: m.address || null, subjects: m.subjects || [], ...(m.study_group ? { study_group: m.study_group } : {}),
+      ...(m.teacher_applied ? { teacher_applied: true, institution: m.institution || null, qualification: m.qualification || null, grade: m.grade || null } : {}) }, null);
+    ({ data } = await sb.from("profiles").select("*").eq("id", user.id).maybeSingle());
+  }
+  return data;
+}
+async function start(view, anchor){
+  leaveChat();
+  const { data: { session } } = await sb.auth.getSession();
+  if(!session){
+    if(LINK_ERR && !linkErrShown){
+      linkErrShown = true;
+      history.replaceState(null, "", location.pathname + location.search);
+      return showForgot("student", "That reset link has expired or was already used. Request a new one below.");
+    }
+    return routeOut();
+  }
+  if(RECOVERY) return showNewPassword();
+  if(location.hash) history.replaceState(null, "", location.pathname + location.search);
+  const profile = await getProfile(session.user);
+  nav.innerHTML = `<button class="ghost" id="out">Log out</button>`;
+  document.getElementById("out").onclick = async () => { await sb.auth.signOut(); showHome(); };
+  if(!profile) { app.innerHTML = `<p class="err">Could not load your profile. Please try again.</p>`; return; }
+  const { data: isAdmin } = await sb.rpc("is_admin");
+  me = { p: profile, user: session.user, admin: isAdmin === true };
+  if(isAdmin === true){ drawSubnav("home"); return showAdmin(profile); }
+  if(view === "page"){
+    drawSubnav("page");
+    if(profile.role === "teacher") await showTeacher(profile, session.user); else await showStudent(profile);
+    if(typeof anchor === "string") setTimeout(() => go(anchor), 150);
+    return;
+  }
+  drawSubnav("home");
+  return showWelcome();
+}
+
+async function fileLink(path){
+  if(!path) return "";
+  const { data } = await sb.storage.from("materials").createSignedUrl(path, 3600);
+  return data ? `<p><a class="btn" href="${data.signedUrl}" target="_blank" rel="noopener">Download material</a></p>` : "";
+}
+async function lessonHtml(l, canDelete, o = {}){
+  return `<div class="card ${o.done ? "isdone" : ""}">
+    <b>${esc(l.title)}</b>
+    <div class="mut">${new Date(l.created_at).toLocaleDateString()}</div>
+    ${l.subject ? `<span class="chip" style="margin-top:2px">${esc(l.subject)}</span>` : ""}
+    ${l.description ? `<p>${esc(l.description)}</p>` : ""}
+    ${embed(l.video_url)}${await fileLink(l.file_url)}
+    ${o.done !== undefined ? `<button class="${o.done ? "sec" : ""}" data-prog="${o.done ? "unmark" : "mark"}" data-id="${l.id}">${o.done ? "✓ Completed (tap to undo)" : "Mark as done"}</button>` : ""}
+    ${o.count !== undefined ? `<p class="mut" style="margin:10px 0 0">${o.count} student${o.count === 1 ? "" : "s"} completed this lesson</p>` : ""}
+    ${canDelete ? `<button class="del" data-id="${l.id}">Delete</button>` : ""}
+  </div>`;
+}
+
+async function profileCard(p){
+  const who = p.name || p.full_name || "", tch = p.role === "teacher" || p.teacher_applied;
+  let photo = "";
+  if(p.photo_path){ const { data } = await sb.storage.from("avatars").createSignedUrl(p.photo_path, 3600); if(data) photo = data.signedUrl; }
+  const subs = (p.subjects || []).map(x => `<span class="chip">${esc(x)}</span>`).join("") || `<span class="mut">None chosen yet</span>`;
+  const rows = [["Phone", p.phone], ...(tch ? [] : [["Studying for", p.study_group]]), ["Age", p.age], ["Sex", p.sex], ["Address", p.address]].concat(tch ? [["School", p.institution], ["Qualification", p.qualification], ["Grade", p.grade]] : []);
+  return `<div class="card prof">
+    ${photo ? `<img src="${photo}" alt="Your passport photograph">` : `<div class="ph0" aria-hidden="true">${esc(who.charAt(0).toUpperCase() || "?")}</div>`}
+    <div><b style="font-size:19px">${esc(who)}</b><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v || "—")}</dd>`).join("")}</dl></div>
+    <div class="full"><b>${p.role === "teacher" ? "Subjects I teach" : "My subjects"}</b><div>${subs}</div><button id="ed">Edit my details</button></div>
+  </div><div id="editbox"></div>`;
+}
+function wireEdit(p, user){
+  const tch = p.role === "teacher" || p.teacher_applied, who = p.name || p.full_name || "";
+  document.getElementById("ed").onclick = () => {
+    editbox.innerHTML = `<div class="card"><h2 style="margin-top:0">Edit my details</h2>
+      <label for="en">Full name</label><input id="en" value="${esc(who)}">
+      ${detailFields(p, tch ? "Subjects you teach" : undefined, !tch)}${tch ? teacherFields(p) : ""}
+      <button id="sv">Save</button> <button id="cn" class="sec">Cancel</button><div class="msg" id="m" role="status"></div></div>`;
+    cn.onclick = () => { editbox.innerHTML = ""; };
+    sv.onclick = async () => {
+      const dd = readDetails(), n = en.value.trim(), tf = tch ? readTeacher() : {};
+      if(!dd || !n || !tf) return say("Fill in every field and choose at least one subject.", true);
+      say("Saving…");
+      const err = await saveDetails(user, { ...dd, ...tf, name: n }, pf.files[0], tch ? cf.files[0] : null);
+      if(err) return say(err, true);
+      start("page");
+    };
+    editbox.scrollIntoView({ behavior: "smooth" });
+  };
+}
+/* ---------- Live classes (Jitsi) ---------- */
+const JITSI = "https://meet.jit.si/";
+let liveTimer;
+function roomName(){
+  const a = new Uint8Array(10); crypto.getRandomValues(a);
+  return "BrilliantMinds-" + Array.from(a, x => (x % 36).toString(36)).join("");
+}
+function joinUrl(c, name){
+  return JITSI + encodeURIComponent(c.room) + "#userInfo.displayName=" + encodeURIComponent(JSON.stringify(name || "Guest")) + "&config.subject=" + encodeURIComponent(JSON.stringify(c.title));
+}
+function when(c){
+  return c.scheduled_at ? new Date(c.scheduled_at).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "Time not set";
+}
+function classTop(c){
+  return `<div class="row" style="margin:0"><b>${esc(c.title)}</b>${c.status === "live" ? `<span class="livebadge">LIVE NOW</span>` : c.status === "ended" ? `<span class="chip" style="margin:0">Ended</span>` : ""}</div>
+  <div class="mut">${esc(when(c))}</div>
+  <div>${c.subject ? `<span class="chip">${esc(c.subject)}</span>` : ""}<span class="chip">${esc(c.study_group || "All students")}</span></div>`;
+}
+async function loadLiveStudent(p, quiet){
+  const box = document.getElementById("livelist");
+  if(!box) return;
+  const { data, error } = await sb.from("classes").select("*").in("status", ["scheduled", "live"]);
+  if(error) return box.textContent = error.message;
+  const mine = (data || []).filter(c => !c.study_group || c.study_group === p.study_group)
+    .sort((a, b) => (b.status === "live") - (a.status === "live") || new Date(a.scheduled_at || a.created_at) - new Date(b.scheduled_at || b.created_at));
+  if(!mine.length){ box.className = "mut"; return box.textContent = "No live classes right now. Check back soon."; }
+  box.className = "";
+  const name = p.name || p.full_name || "Student";
+  box.innerHTML = mine.map(c => `<div class="card">${classTop(c)}
+    ${c.status === "live"
+      ? `<a class="btn" href="${esc(joinUrl(c, name))}" target="_blank" rel="noopener">Join class</a>`
+      : `<p class="mut" style="margin:10px 0 0">Waiting for the teacher to start. Tap Refresh when it is time.</p>`}</div>`).join("");
+  if(!quiet){
+    clearInterval(liveTimer);
+    liveTimer = setInterval(() => { document.getElementById("livelist") ? loadLiveStudent(p, true) : clearInterval(liveTimer); }, 30000);
+  }
+}
+async function loadLiveTeacher(user, p){
+  const box = document.getElementById("livelist");
+  if(!box) return;
+  const { data, error } = await sb.from("classes").select("*").eq("teacher_id", user.id).order("created_at", { ascending: false });
+  if(error) return box.textContent = error.message;
+  if(!data.length){ box.className = "mut"; return box.textContent = "You haven't created any live classes yet."; }
+  box.className = "";
+  const name = p.name || p.full_name || "Teacher";
+  box.innerHTML = data.map(c => `<div class="card">${classTop(c)}<div class="livebtns">
+    ${c.status === "scheduled" ? `<button data-act="start" data-id="${c.id}">Start class</button>` : ""}
+    ${c.status === "live" ? `<a class="btn" href="${esc(joinUrl(c, name))}" target="_blank" rel="noopener">Open class</a><button class="sec" data-act="end" data-id="${c.id}">End class</button>` : ""}
+    <button class="del" data-act="del" data-id="${c.id}">Delete</button></div></div>`).join("");
+  const byId = id => data.find(c => c.id === id);
+  box.querySelectorAll("button[data-act]").forEach(b => b.onclick = async () => {
+    const c = byId(b.dataset.id), act = b.dataset.act;
+    if(act === "del"){
+      if(!confirm("Delete this class?")) return;
+      await sb.from("classes").delete().eq("id", c.id);
+    } else if(act === "end"){
+      if(!confirm("End this class for everyone?")) return;
+      await sb.from("classes").update({ status: "ended" }).eq("id", c.id);
+    } else {
+      const w = window.open("about:blank", "_blank");
+      const { error: e } = await sb.from("classes").update({ status: "live" }).eq("id", c.id);
+      if(e){ if(w) w.close(); return alert(e.message); }
+      if(w) w.location = joinUrl(c, name);
+    }
+    loadLiveTeacher(user, p);
+  });
+}
+function wireLive(p, user){
+  const fb = document.getElementById("liveform");
+  document.getElementById("nc").onclick = () => {
+    if(fb.innerHTML){ fb.innerHTML = ""; return; }
+    const opts = (p.subjects && p.subjects.length) ? p.subjects : SUBJECTS;
+    fb.innerHTML = `<div class="card" style="margin-top:12px"><h2 style="margin-top:0">Create a live class</h2>
+    <label for="cT">Class title</label><input id="cT" placeholder="e.g. JAMB Mathematics: Algebra revision">
+    <label for="cS">Subject</label><select id="cS"><option value="">General (all subjects)</option>${opts.map(x => `<option>${esc(x)}</option>`).join("")}</select>
+    <label for="cG">Who is this class for?</label><select id="cG"><option value="">All students</option>${GROUPS.map(([g, o]) => `<optgroup label="${g}">${o.map(x => `<option>${x}</option>`).join("")}</optgroup>`).join("")}</select>
+    <label for="cW">Date and time (optional)</label><input id="cW" type="datetime-local">
+    <button id="cSave">Create class</button><div class="msg" id="lm" role="status"></div></div>`;
+    document.getElementById("cSave").onclick = async () => {
+      const lm = document.getElementById("lm"), title = cT.value.trim();
+      if(!title){ lm.className = "msg err"; return lm.textContent = "Please add a class title."; }
+      lm.className = "msg"; lm.textContent = "Creating…";
+      const { error } = await sb.from("classes").insert({ title, subject: cS.value || null, study_group: cG.value || null, scheduled_at: cW.value ? new Date(cW.value).toISOString() : null, room: roomName() });
+      if(error){ lm.className = "msg err"; return lm.textContent = error.message; }
+      fb.innerHTML = "";
+      loadLiveTeacher(user, p);
+    };
+  };
+  loadLiveTeacher(user, p);
+}
+/* ---------- About us ---------- */
+const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><rect width="512" height="512" rx="116" fill="#0b6b4f"/><g stroke="#f5a623" stroke-width="16" stroke-linecap="round"><path d="M256 62v30"/><path d="M150 100l20 24"/><path d="M362 100l-20 24"/><path d="M98 190l30 10"/><path d="M414 190l-30 10"/></g><circle cx="256" cy="262" r="104" fill="#f5a623"/><circle cx="256" cy="262" r="70" fill="#ffd98a"/><rect x="212" y="356" width="88" height="22" rx="11" fill="#ffd98a"/><rect x="226" y="384" width="60" height="20" rx="10" fill="#ffd98a"/><path d="M120 176L256 118l136 58-136 58z" fill="#ffffff"/><path d="M196 214v38c36 24 84 24 120 0v-38l-60 26z" fill="#e3f4ec"/><path d="M392 182v54" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/><circle cx="392" cy="242" r="10" fill="#ffffff"/></svg>`;
+const LOGO = "data:image/svg+xml," + encodeURIComponent(LOGO_SVG);
+function showAbout(){
+  leaveChat();
+  if(me) drawSubnav("home"); else { subnav.innerHTML = ""; homeMenu(); }
+  window.scrollTo(0, 0);
+  app.innerHTML = `<button class="link back" id="abB">← ${me ? "Back" : "Back to home"}</button>
+  <section class="card abt"><img class="logo" src="${LOGO}" alt="Brilliant Minds Tutorials logo">
+    <h1 style="margin:14px 0 6px">Brilliant Minds Tutorials</h1>
+    <p class="mut" style="margin:0">Learn with confidence. Teach with purpose.</p></section>
+  <section class="card"><h2 style="margin-top:0">Who we are</h2>
+    <p style="margin:0">Brilliant Minds Tutorials is an online place to learn and to teach. We support students preparing for JAMB and WAEC / NECO, and students in senior secondary school, SSS1 to SSS3. Teachers and students meet here on any phone.</p></section>
+  <section class="card"><h2 style="margin-top:0">What you get</h2>
+    <ul class="ticks">
+      <li><b>Video lessons</b> from your teachers, ready whenever you are</li>
+      <li><b>Notes and materials</b> you can download</li>
+      <li><b>Live classes</b> by video or audio for your study group</li>
+      <li><b>Chatrooms</b> to talk with other students and teachers</li>
+      <li><b>Search</b> for lessons, or ask any question and get answers</li>
+      <li><b>Progress tracking</b> so you can see how far you have come</li>
+    </ul></section>
+  <section class="card"><div class="who"><img src="${PHOTO}" alt="Oluwapelumi Samuel Oyepeju, founder of Brilliant Minds Tutorials"><div>
+    <h2>Our founder</h2><div><b>Oluwapelumi Samuel Oyepeju</b></div><div class="mut">Founder, Brilliant Minds Tutorials</div>
+    <p style="margin:8px 0 0">Whether you want to learn or to teach, there is a place for you here.</p></div></div></section>
+  ${me ? "" : `<section class="card note"><h2 style="margin-top:0">Teach with us</h2>
+    <p>Are you a teacher? Apply in the Teacher portal. We review every application before a teacher account is activated.</p>
+    <button id="abT">Apply to teach</button></section>`}
+  <section class="card note"><h2 style="margin-top:0">Contact us</h2>
+    <p style="margin-top:0">Questions? Talk to us directly.</p>
+    <div class="cta" style="margin-top:6px"><a class="btn" style="margin:0" href="https://wa.me/2349134192598" target="_blank" rel="noopener">WhatsApp</a><a class="btn" style="margin:0" href="mailto:oluwapelumisamuel319@gmail.com">Email</a></div></section>`;
+  document.getElementById("abB").onclick = () => me ? (me.admin ? start() : showWelcome()) : showHome();
+  const t = document.getElementById("abT");
+  if(t) t.onclick = () => openPortal("teacher");
+}
+/* ---------- Home screen after login ---------- */
+const QA_ICONS = {
+  ann: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fdf0d3"/><path d="M16 27h10l16-9v28l-16-9H16z" fill="#0b6b4f"/><rect x="19" y="36" width="7" height="12" rx="2" fill="#0b6b4f"/><path d="M47 26c3 2 3 10 0 12" stroke="#f5a623" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`,
+  tt: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#e3f4ec"/><rect x="14" y="17" width="36" height="32" rx="5" fill="#0b6b4f"/><rect x="14" y="17" width="36" height="9" rx="4" fill="#f5a623"/><g fill="#fff"><circle cx="23" cy="34" r="2.4"/><circle cx="32" cy="34" r="2.4"/><circle cx="41" cy="34" r="2.4"/><circle cx="23" cy="42" r="2.4"/><circle cx="32" cy="42" r="2.4"/></g></svg>`,
+  lessons: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#e3f4ec"/><rect x="14" y="18" width="36" height="26" rx="5" fill="#0b6b4f"/><path d="M28 25l11 6-11 6z" fill="#fff"/><path d="M22 50h20" stroke="#f5a623" stroke-width="4" stroke-linecap="round"/></svg>`,
+  live: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fdf0d3"/><rect x="12" y="20" width="26" height="24" rx="5" fill="#0b6b4f"/><path d="M38 29l14-8v22l-14-8z" fill="#f5a623"/></svg>`,
+  chat: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#e3f4ec"/><path d="M14 22a6 6 0 016-6h24a6 6 0 016 6v14a6 6 0 01-6 6H31l-10 8v-8a6 6 0 01-7-6z" fill="#0b6b4f"/><circle cx="24" cy="29" r="2.6" fill="#fff"/><circle cx="32" cy="29" r="2.6" fill="#fff"/><circle cx="40" cy="29" r="2.6" fill="#fff"/></svg>`,
+  library: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#e3f4ec"/><rect x="14" y="18" width="9" height="28" rx="2" fill="#0b6b4f"/><rect x="25" y="14" width="9" height="32" rx="2" fill="#f5a623"/><rect x="36" y="20" width="9" height="26" rx="2" fill="#0b6b4f"/><path d="M47 24l7 2-6 20-7-2z" fill="#07503b"/><path d="M12 50h40" stroke="#f5a623" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  search: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fdf0d3"/><circle cx="29" cy="29" r="12" fill="none" stroke="#0b6b4f" stroke-width="5"/><path d="M38 38l11 11" stroke="#f5a623" stroke-width="6" stroke-linecap="round"/></svg>`
+};
+async function showWelcome(){
+  if(!me || me.admin) return start();
+  leaveChat();
+  const { p, user } = me, tch = p.role === "teacher", name = p.name || p.full_name || "";
+  drawSubnav("home");
+  window.scrollTo(0, 0);
+  const pending = p.teacher_applied && !tch;
+  app.innerHTML = `<section class="pbanner ${tch ? "t" : "s"}">${tch ? TEACHER_ICON : STUDENT_ICON}<div><h1>Welcome, ${esc(name)}</h1>
+    <p>${tch ? "Share lessons and teach live. Everything you need is one tap away." : "Lessons, live classes and chat, all in one place."}</p></div></section>
+  ${pending ? `<div class="card" style="border-color:var(--acc)"><b>Teacher application under review.</b><br><span class="mut">Your account becomes a teacher account once it is approved. Until then you can use it as a student.</span></div>` : ""}
+  <button id="wvp" style="width:100%;margin:0 0 14px">View my profile</button>
+  <div id="rwstrip"></div>
+  <div id="annstrip"></div>
+  <div id="livenow"></div>
+  <div class="roles">
+    <button class="role s" data-q="lessons">${QA_ICONS.lessons}<b>My lessons</b><span>${tch ? "Post and manage lessons" : "Watch and download"}</span></button>
+    <button class="role t" data-q="live">${QA_ICONS.live}<b>Live classes</b><span>${tch ? "Create and start classes" : "Join your class"}</span></button>
+    <button class="role s" data-q="chat">${QA_ICONS.chat}<b>Chatrooms</b><span>Talk with others</span></button>
+    <button class="role t" data-q="search">${QA_ICONS.search}<b>Search</b><span>Ask anything</span></button>
+    <button class="role s" data-q="ann">${QA_ICONS.ann}<b>Announcements</b><span>News and notices</span></button>
+    <button class="role t" data-q="tt">${QA_ICONS.tt}<b>Timetable</b><span>${tch ? "Post class times" : "Your class times"}</span></button>
+    <button class="role s" data-q="library" style="grid-column:1/-1">${QA_ICONS.library}<b>Library</b><span>${tch ? "Teaching materials" : "Past questions, unlock with points"}</span></button>
+  </div>
+  <section class="card" id="welcome"><div class="who"><img src="${PHOTO}" alt="Oluwapelumi Samuel Oyepeju, founder of Brilliant Minds Tutorials"><div>
+    <h2>Welcome</h2><p style="margin:0">Whether you want to learn or to teach, there is a place for you here. Take your time, ask questions, and grow.</p>
+    <div><b>Oluwapelumi Samuel Oyepeju</b></div><div class="mut">Founder, Brilliant Minds Tutorials</div></div></div></section>
+  <section class="card note" id="contact"><h2>Contact us</h2>
+    <p style="margin-top:0">Need help? Talk to us directly.</p>
+    <div class="cta" style="margin-top:6px"><a class="btn" style="margin:0" href="https://wa.me/2349134192598" target="_blank" rel="noopener">WhatsApp</a><a class="btn" style="margin:0" href="mailto:oluwapelumisamuel319@gmail.com">Email</a></div></section>
+  <p class="foot"><button class="link" id="abt">About us</button> · © Brilliant Minds Tutorials</p>`;
+  document.getElementById("wvp").onclick = () => start("page");
+  if(isStudent()) rewardStrip();
+  annStrip();
+  document.getElementById("abt").onclick = showAbout;
+  app.querySelectorAll("button[data-q]").forEach(b => b.onclick = () => {
+    const q = b.dataset.q;
+    if(q === "lessons") start("page", "list");
+    else if(q === "live") start("page", "livelist");
+    else if(q === "chat") showChat();
+    else if(q === "library") showLibrary();
+    else if(q === "ann") showAnnouncements();
+    else if(q === "tt") showTimetable();
+    else showSearch();
+  });
+  sb.from("classes").select("*").eq("status", "live").then(({ data }) => {
+    const box = document.getElementById("livenow");
+    if(!box || !data) return;
+    const mine = data.filter(c => tch ? c.teacher_id === user.id : (!c.study_group || c.study_group === p.study_group));
+    if(!mine.length) return;
+    box.innerHTML = mine.map(c => `<div class="card" style="border-color:var(--acc)">${classTop(c)}<a class="btn" href="${esc(joinUrl(c, name))}" target="_blank" rel="noopener">${tch ? "Open class" : "Join class"}</a></div>`).join("");
+  });
+}
+/* ---------- Sub navigation, chatrooms and search ---------- */
+function leaveChat(){ if(chatStop){ chatStop(); chatStop = null; } if(typeof stopMock === "function") stopMock(); }
+function drawSubnav(on){
+  const admin = me && me.admin, staff = me && (admin || me.p.role === "teacher");
+  const items = admin ? [["home", "Dashboard"], ["practice", "Practice"], ["chat", "Chat"], ["search", "Search"]]
+    : [["home", "Home"], ["page", "My page"], ["tests", "Tests"], ["chat", "Chat"], ["search", "Search"]];
+  subnav.innerHTML = `<div class="tabs ${items.length === 5 ? "five" : items.length === 4 ? "four" : "three"} ${staff ? "t" : ""}" role="tablist">${items.map(([v, l]) => `<button data-v="${v}" class="${on === v ? "on" : ""}">${l}</button>`).join("")}</div>`;
+  subnav.querySelectorAll("button").forEach(b => b.onclick = () => {
+    const v = b.dataset.v;
+    if(v === "home") admin ? start() : showWelcome();
+    else if(v === "page") start("page");
+    else if(v === "tests") showTests();
+    else if(v === "practice") showPractice();
+    else if(v === "chat") showChat();
+    else showSearch();
+  });
+}
+function chatTime(s){
+  const d = new Date(s), t = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  return d.toDateString() === new Date().toDateString() ? t : d.toLocaleDateString([], { day: "numeric", month: "short" }) + ", " + t;
+}
+function showChat(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav("chat");
+  const { p, user, admin } = me, staff = admin || p.role === "teacher";
+  const rooms = ["General", ...(staff ? GROUPS.flatMap(g => g[1]) : (p.study_group ? [p.study_group] : []))];
+  let room = rooms.includes(chatRoom) ? chatRoom : "General", first = true;
+  window.scrollTo(0, 0);
+  app.innerHTML = `<h1>Chatrooms</h1>
+  <p class="mut" style="margin:-4px 0 12px">Be kind and respectful. Use Report on anything that is not.</p>
+  ${!staff && !p.study_group ? `<p class="mut">Add your study group under "Edit my details" on My page to join your group room.</p>` : ""}
+  <div class="rooms" id="chRooms"></div>
+  <div class="card chatcard"><div class="chat" id="chBox" aria-live="polite">Loading…</div>
+    <div class="chatin"><textarea id="chIn" rows="1" maxlength="500" placeholder="Write a message…" aria-label="Message"></textarea><button id="chSend">Send</button></div>
+    <div class="msg" id="chErr" role="status"></div></div>`;
+  const box = document.getElementById("chBox"), inp = document.getElementById("chIn"), btn = document.getElementById("chSend"), errEl = document.getElementById("chErr");
+  const drawRooms = () => {
+    const r = document.getElementById("chRooms");
+    r.innerHTML = rooms.map(x => `<button data-r="${esc(x)}" class="${x === room ? "on" : ""}">${esc(x)}</button>`).join("");
+    r.querySelectorAll("button").forEach(b => b.onclick = () => { room = b.dataset.r; chatRoom = room; first = true; box.textContent = "Loading…"; drawRooms(); load(); });
+  };
+  const bubble = m => {
+    const own = m.user_id === user.id;
+    return `<div class="bub ${own ? "me" : ""}"><div class="bh"><b>${esc(own ? "You" : (m.user_name || "Member"))}</b><span>${esc(chatTime(m.created_at))}</span></div>
+      <div class="bt">${esc(m.content)}</div>
+      <div class="ba">${!own ? (m.reported ? `<span class="mut">Reported</span>` : `<button class="link" data-a="rep" data-id="${m.id}">Report</button>`) : ""}${own || admin ? `<button class="link" data-a="del" data-id="${m.id}">Delete</button>` : ""}</div></div>`;
+  };
+  async function load(){
+    const { data, error } = await sb.from("chat_messages").select("*").eq("room", room).order("created_at", { ascending: false }).limit(100);
+    if(!document.getElementById("chBox")) return;
+    if(error) return box.textContent = error.message;
+    const keep = box.scrollTop, stick = first || box.scrollHeight - box.scrollTop - box.clientHeight < 90;
+    first = false;
+    box.innerHTML = data.length ? data.slice().reverse().map(bubble).join("") : `<p class="mut" style="margin:auto;text-align:center">No messages yet. Say hello!</p>`;
+    box.scrollTop = stick ? box.scrollHeight : keep;
+  }
+  box.onclick = async e => {
+    const b = e.target.closest("button[data-a]");
+    if(!b) return;
+    const id = b.dataset.id;
+    if(b.dataset.a === "del"){
+      if(!confirm("Delete this message?")) return;
+      const { error } = await sb.from("chat_messages").delete().eq("id", id);
+      if(error) alert(error.message);
+    } else {
+      if(!confirm("Report this message to the admin?")) return;
+      const { error } = await sb.from("chat_messages").update({ reported: true }).eq("id", id);
+      if(error) alert(error.message);
+    }
+    load();
+  };
+  async function send(){
+    const text = inp.value.trim();
+    if(!text) return;
+    btn.disabled = true;
+    const { error } = await sb.from("chat_messages").insert({ room, user_id: user.id, user_name: p.name || p.full_name || "Member", content: text.slice(0, 500) });
+    btn.disabled = false;
+    if(error){ errEl.className = "msg err"; return errEl.textContent = error.message; }
+    errEl.textContent = ""; inp.value = ""; first = true; load();
+  }
+  btn.onclick = send;
+  inp.onkeydown = e => { if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); send(); } };
+  const ch = sb.channel("chat-" + Date.now()).on("postgres_changes", { event: "*", schema: "public", table: "chat_messages" }, () => load()).subscribe();
+  const timer = setInterval(() => { document.getElementById("chBox") ? load() : leaveChat(); }, 15000);
+  chatStop = () => { clearInterval(timer); sb.removeChannel(ch); };
+  drawRooms();
+  load();
+}
+
+let srSeq = 0, cseOn = false;
+function mountCSE(){
+  const el = document.getElementById("gbox");
+  if(!el) return;
+  const draw = () => { try{ google.search.cse.element.render({ div: "gbox", tag: "search" }); }catch(e){ el.textContent = "Web search could not load. Check your connection and try again."; } };
+  if(window.google && google.search && google.search.cse && google.search.cse.element) return draw();
+  window.__gcse = { parsetags: "explicit", callback: draw };
+  if(cseOn) return;
+  cseOn = true;
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://cse.google.com/cse.js?cx=" + encodeURIComponent(CSE_ID);
+  document.head.appendChild(s);
+}
+function wikiClean(q){
+  return q.replace(/^(what|who|where|when|why|how)('s|\s+(is|are|was|were|does|do|did|can|to))?\s+(a |an |the )?/i, "").replace(/\?+$/, "").trim() || q;
+}
+async function wikiSearch(term){
+  const u = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrlimit=5&gsrsearch=" + encodeURIComponent(term)
+    + "&prop=extracts%7Cpageimages&exintro=1&explaintext=1&exsentences=4&exlimit=max&piprop=thumbnail&pithumbsize=160";
+  const r = await fetch(u);
+  if(!r.ok) throw new Error("Wikipedia is not reachable right now.");
+  const j = await r.json();
+  return Object.values((j.query && j.query.pages) || {}).sort((a, b) => a.index - b.index);
+}
+const wikiCard = pg => `<div class="card wk">${pg.thumbnail ? `<img src="${esc(pg.thumbnail.source)}" alt="">` : ""}<div>
+  <b style="font-size:19px">${esc(pg.title)}</b>
+  <p style="margin:6px 0;white-space:pre-line">${esc(pg.extract || "No summary available.")}</p>
+  <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(pg.title.replace(/ /g, "_"))}" target="_blank" rel="noopener">Read more on Wikipedia</a></div></div>`;
+function showChatGate(){
+  leaveChat(); subnav.innerHTML = ""; me = null;
+  homeMenu();
+  window.scrollTo(0, 0);
+  app.innerHTML = `<button class="link back" id="cgB">← Back to home</button>
+  <section class="card" style="text-align:center;padding:28px 20px"><h1 style="margin-top:0">Chatrooms</h1>
+    <p>Talk with other students and teachers in the General room and in your study group room.</p>
+    <p class="mut">Log in to join the conversation.</p>
+    <button id="cgS">Student login</button> <button id="cgT" class="sec">Teacher login</button></section>`;
+  document.getElementById("cgB").onclick = showHome;
+  document.getElementById("cgS").onclick = () => openPortal("student");
+  document.getElementById("cgT").onclick = () => openPortal("teacher");
+}
+function showSearch(initial){
+  leaveChat();
+  if(me) drawSubnav("search"); else { subnav.innerHTML = ""; homeMenu(); }
+  const p = me ? me.p : null, staff = !!(me && (me.admin || p.role === "teacher")), name = p ? (p.name || p.full_name || "Guest") : "Guest";
+  window.scrollTo(0, 0);
+  app.innerHTML = `${me ? "" : `<button class="link back" id="srBack">← Back to home</button>`}<h1>Search</h1>
+  <div class="tabs three ${staff ? "t" : ""}"><button id="srT1" class="on">Answers</button><button id="srT2">Lessons</button><button id="srT3">The web</button></div>
+  <div id="srBox"><input id="srQ" type="search" autocomplete="off" aria-label="Search"><div id="srOut" class="mut" style="margin-top:14px"></div></div>
+  <div id="srWeb" class="hide"></div>`;
+  if(!me) document.getElementById("srBack").onclick = showHome;
+  const tabs = ["srT1", "srT2", "srT3"].map(id => document.getElementById(id));
+  const box = document.getElementById("srBox"), web = document.getElementById("srWeb"), q = document.getElementById("srQ"), out = document.getElementById("srOut");
+  const hints = ["Ask anything, like “What is photosynthesis?”", "Search lessons, subjects and live classes…"];
+  const idle = ["Type a question or a topic. Answers come from Wikipedia.", "Type to search lessons and live classes."];
+  let tab = 0, tmr;
+  async function runAnswers(raw){
+    const mine = ++srSeq, s = raw.trim();
+    if(s.length < 2){ out.className = "mut"; out.textContent = idle[0]; return; }
+    out.className = "mut"; out.textContent = "Searching…";
+    try{
+      const cleaned = wikiClean(s);
+      let pages = await wikiSearch(cleaned);
+      if(!pages.length && cleaned !== s) pages = await wikiSearch(s);
+      if(mine !== srSeq) return;
+      out.className = "";
+      out.innerHTML = pages.length ? pages.map(wikiCard).join("") + `<p class="mut">Answers from Wikipedia, the free encyclopedia.</p>`
+        : `<p class="mut">Nothing found for “${esc(s)}”. Try different words.</p>`;
+    }catch(e){
+      if(mine === srSeq){ out.className = "mut"; out.textContent = "Could not reach Wikipedia. Check your connection and try again."; }
+    }
+  }
+  async function runLessons(raw){
+    const mine = ++srSeq, s = raw.replace(/[,()%*\\"']/g, " ").replace(/\s+/g, " ").trim();
+    if(!me){
+      out.className = "";
+      out.innerHTML = `<div class="card"><b>Log in to search lessons and live classes.</b><br><button id="srLg">Student login</button></div>`;
+      document.getElementById("srLg").onclick = () => openPortal("student");
+      return;
+    }
+    if(s.length < 2){ out.className = "mut"; out.textContent = idle[1]; return; }
+    out.className = "mut"; out.textContent = "Searching…";
+    const pat = "%" + s + "%";
+    const [L, C] = await Promise.all([
+      sb.from("lessons").select("*").or(`title.ilike.${pat},description.ilike.${pat},subject.ilike.${pat}`).order("created_at", { ascending: false }).limit(20),
+      sb.from("classes").select("*").in("status", ["scheduled", "live"]).or(`title.ilike.${pat},subject.ilike.${pat}`).limit(20)
+    ]);
+    if(mine !== srSeq) return;
+    if(L.error){ out.textContent = L.error.message; return; }
+    const classes = (C.data || []).filter(c => staff || !c.study_group || c.study_group === p.study_group);
+    const lessonsHtml = (await Promise.all((L.data || []).map(l => lessonHtml(l, false, {})))).join("");
+    if(mine !== srSeq) return;
+    const classHtml = classes.map(c => `<div class="card">${classTop(c)}${c.status === "live" ? `<a class="btn" href="${esc(joinUrl(c, name))}" target="_blank" rel="noopener">Join class</a>` : ""}</div>`).join("");
+    out.className = "";
+    out.innerHTML = (!lessonsHtml && !classHtml)
+      ? `<p class="mut">Nothing found for “${esc(s)}”. Try other words.</p>`
+      : (lessonsHtml ? `<h2 style="margin-top:0">Lessons</h2>${lessonsHtml}` : "") + (classHtml ? `<h2>Live classes</h2>${classHtml}` : "");
+  }
+  const run = raw => tab === 0 ? runAnswers(raw) : runLessons(raw);
+  const pick = i => {
+    tab = i;
+    tabs.forEach((b, j) => b.className = j === i ? "on" : "");
+    box.classList.toggle("hide", i === 2);
+    web.classList.toggle("hide", i !== 2);
+    if(i === 2){
+      if(!web.innerHTML) web.innerHTML = CSE_ID ? `<div id="gbox"></div>`
+        : `<div class="card"><b>Web search is not switched on yet.</b><p class="mut" style="margin-bottom:0">The site owner needs to add a Google search engine ID to the site first.</p></div>`;
+      if(CSE_ID) mountCSE();
+      return;
+    }
+    q.placeholder = hints[i];
+    out.className = "mut"; out.textContent = idle[i];
+    if(q.value.trim().length >= 2 || (i === 1 && !me)) run(q.value);
+  };
+  tabs.forEach((b, i) => b.onclick = () => pick(i));
+  q.oninput = () => { clearTimeout(tmr); tmr = setTimeout(() => run(q.value), 450); };
+  q.onkeydown = e => { if(e.key === "Enter"){ clearTimeout(tmr); run(q.value); } };
+  if(typeof initial === "string" && initial) q.value = initial;
+  pick(0);
+  if(!(typeof initial === "string" && initial)) q.focus({ preventScroll: true });
+}
+
+/* ---------- Admin dashboard ---------- */
+let adminId = null;
+async function showAdmin(p){
+  adminId = p.id;
+  app.innerHTML = `<h1>Admin dashboard</h1><p class="mut" style="margin-top:-4px">Signed in as ${esc(p.name || p.full_name || "admin")}</p>
+  <div style="display:flex;gap:10px;margin-bottom:12px"><button id="aan" style="margin:0;flex:1">📢 Announcements</button><button id="att" style="margin:0;flex:1">🗓️ Timetable</button></div>
+  <div class="stats" id="stats"></div>
+  <h2>Teacher applications</h2><div id="apps" class="mut">Loading…</div>
+  <h2>Reported messages</h2><div id="reps" class="mut">Loading…</div>
+  <h2>Teachers</h2><div id="tchs" class="mut">Loading…</div>
+  <h2>Students</h2><input id="sq" placeholder="Search by name, phone or study group"><div id="studs" class="mut" style="margin-top:12px">Loading…</div>`;
+  document.getElementById("aan").onclick = showAnnouncements;
+  document.getElementById("att").onclick = showTimetable;
+  loadAdmin();
+}
+async function loadAdmin(){
+  const { data: all, error } = await sb.from("profiles").select("*");
+  if(error) return document.getElementById("apps").textContent = error.message;
+  const cnt = async t => { const { count } = await sb.from(t).select("*", { count: "exact", head: true }); return count ?? 0; };
+  const [nl, nc] = await Promise.all([cnt("lessons"), cnt("classes")]);
+  const nameOf = r => r.name || r.full_name || "(no name)";
+  const apps = all.filter(r => r.teacher_applied && r.role !== "teacher");
+  const tchs = all.filter(r => r.role === "teacher");
+  const others = tchs.filter(r => r.id !== adminId);
+  const studs = all.filter(r => r.role !== "teacher" && r.id !== adminId).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+  document.getElementById("stats").innerHTML = [["Students", studs.length], ["Teachers", others.length], ["Pending", apps.length], ["Lessons", nl], ["Live classes", nc]]
+    .map(([k, v]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+  const repsBox = document.getElementById("reps");
+  {
+    const { data: reps, error: re } = await sb.from("chat_messages").select("*").eq("reported", true).order("created_at", { ascending: false }).limit(50);
+    if(re) repsBox.textContent = re.message;
+    else if(!reps.length) repsBox.textContent = "No reported messages.";
+    else {
+      repsBox.className = "";
+      repsBox.innerHTML = reps.map(m => `<div class="card"><div class="row" style="margin:0"><b>${esc(m.user_name || "Member")}</b><span class="chip" style="margin:0">${esc(m.room)}</span></div>
+        <div class="mut">${esc(chatTime(m.created_at))}</div><p style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(m.content)}</p>
+        <div class="livebtns"><button class="del" data-rep="del" data-id="${m.id}">Delete message</button><button class="sec" data-rep="ok" data-id="${m.id}">Dismiss report</button></div></div>`).join("");
+      repsBox.querySelectorAll("button[data-rep]").forEach(b => b.onclick = async () => {
+        const r = b.dataset.rep === "del" ? await sb.from("chat_messages").delete().eq("id", b.dataset.id) : await sb.from("chat_messages").update({ reported: false }).eq("id", b.dataset.id);
+        if(r.error) alert(r.error.message);
+        loadAdmin();
+      });
+    }
+  }
+
+  const appsBox = document.getElementById("apps");
+  if(!apps.length) appsBox.textContent = "No pending applications.";
+  else {
+    appsBox.className = "";
+    const certs = await Promise.all(apps.map(async r => {
+      if(!r.certificate_path) return "";
+      const { data } = await sb.storage.from("avatars").createSignedUrl(r.certificate_path, 3600);
+      return data ? `<p style="margin:10px 0 0"><a href="${data.signedUrl}" target="_blank" rel="noopener">View certificate photo</a></p>` : "";
+    }));
+    appsBox.innerHTML = apps.map((r, i) => `<div class="card"><b style="font-size:19px">${esc(nameOf(r))}</b>
+      <dl class="mini"><dt>Phone</dt><dd>${esc(r.phone || "—")}</dd><dt>Age / Sex</dt><dd>${esc(r.age || "—")} / ${esc(r.sex || "—")}</dd>
+      <dt>Address</dt><dd>${esc(r.address || "—")}</dd><dt>School</dt><dd>${esc(r.institution || "—")}</dd>
+      <dt>Qualification</dt><dd>${esc(r.qualification || "—")}</dd><dt>Grade</dt><dd>${esc(r.grade || "—")}</dd></dl>
+      <div>${(r.subjects || []).map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div>${certs[i]}
+      <div class="livebtns"><button data-act="approve" data-id="${r.id}">Approve</button><button class="del" data-act="decline" data-id="${r.id}">Decline</button></div></div>`).join("");
+  }
+  const tBox = document.getElementById("tchs");
+  if(!tchs.length) tBox.textContent = "No teachers yet.";
+  else {
+    tBox.className = "";
+    tBox.innerHTML = tchs.map(r => `<div class="card"><div class="row" style="margin:0"><div><b>${esc(nameOf(r))}${r.id === adminId ? " (you)" : ""}</b><div class="mut">${esc(r.institution || "")}${r.phone ? " · " + esc(r.phone) : ""}</div></div>
+      ${r.id === adminId ? "" : `<button class="del" style="margin:0" data-act="remove" data-id="${r.id}">Remove access</button>`}</div></div>`).join("");
+  }
+  const sBox = document.getElementById("studs"), sq = document.getElementById("sq");
+  const drawStudents = () => {
+    const q = sq.value.trim().toLowerCase();
+    const rows = studs.filter(r => !q || [nameOf(r), r.phone, r.study_group].join(" ").toLowerCase().includes(q)).slice(0, 100);
+    sBox.className = rows.length ? "" : "mut";
+    sBox.innerHTML = rows.length ? rows.map(r => `<div class="card" style="padding:14px 18px"><b>${esc(nameOf(r))}</b>
+      <div class="mut">${esc(r.study_group || "No study group")}${r.phone ? " · " + esc(r.phone) : ""}</div></div>`).join("") : "No students found.";
+  };
+  sq.oninput = drawStudents; drawStudents();
+
+  const act = async (id, patch, msg) => {
+    if(!confirm(msg)) return;
+    const { error: e } = await sb.from("profiles").update(patch).eq("id", id);
+    if(e) alert(e.message);
+    loadAdmin();
+  };
+  document.querySelectorAll("button[data-act]").forEach(b => b.onclick = () => {
+    const id = b.dataset.id;
+    if(b.dataset.act === "approve") act(id, { role: "teacher" }, "Approve this teacher? They will be able to post lessons and teach live classes.");
+    else if(b.dataset.act === "decline") act(id, { teacher_applied: false }, "Decline this application? The person stays a student.");
+    else act(id, { role: "student", teacher_applied: false }, "Remove this person's teacher access?");
+  });
+}
+async function showStudent(p){
+  const { data: { session } } = await sb.auth.getSession(), user = session.user;
+  const pending = p.teacher_applied && p.role !== "teacher";
+  app.innerHTML = `<h1>Welcome, ${esc(p.name || p.full_name || "")}</h1>
+  ${pending ? `<div class="card" style="border-color:var(--acc)"><b>Teacher application under review.</b><br><span class="mut">Your account becomes a teacher account once it is approved. Until then you can use it as a student.</span></div>` : ""}
+  ${await profileCard(p)}
+  <div class="row"><h2 style="margin:0">Live classes</h2><button id="rf" class="sec" style="margin:0">Refresh</button></div>
+  <p class="mut" style="margin:6px 0 10px">Live classes open in the free Jitsi Meet app. Install it first if you have not.</p>
+  <div id="livelist" class="mut">Loading…</div>
+  <h2>Your lessons</h2><div id="prog"></div><div id="list" class="mut">Loading…</div>`;
+  wireEdit(p, user);
+  document.getElementById("rf").onclick = () => loadLiveStudent(p, true);
+  loadLiveStudent(p);
+  loadStudentLessons(user);
+}
+async function loadStudentLessons(user){
+  const list = document.getElementById("list"), prog = document.getElementById("prog");
+  if(!list) return;
+  const [{ data, error }, pr] = await Promise.all([
+    sb.from("lessons").select("*").order("created_at", { ascending: false }),
+    sb.from("lesson_progress").select("lesson_id")
+  ]);
+  if(error) return list.textContent = error.message;
+  if(!data.length){ prog.innerHTML = ""; return list.textContent = "No lessons yet. Check back soon."; }
+  const done = new Set((pr.data || []).map(r => String(r.lesson_id)));
+  const n = data.filter(l => done.has(String(l.id))).length, pct = Math.round(n / data.length * 100);
+  prog.innerHTML = `<div class="card"><div class="row" style="margin:0"><b>Your progress</b><span class="mut">${n} of ${data.length} lessons completed</span></div>
+    <div class="bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div>
+    ${n === data.length ? `<p style="margin:10px 0 0"><b>All lessons completed. Well done!</b></p>` : ""}</div>`;
+  list.className = "";
+  list.innerHTML = (await Promise.all(data.map(l => lessonHtml(l, false, { done: done.has(String(l.id)) })))).join("");
+  list.querySelectorAll("button[data-prog]").forEach(b => b.onclick = async () => {
+    b.disabled = true;
+    const id = b.dataset.id;
+    const r = b.dataset.prog === "mark"
+      ? await sb.from("lesson_progress").insert({ lesson_id: id })
+      : await sb.from("lesson_progress").delete().eq("lesson_id", id).eq("user_id", user.id);
+    if(r.error) alert(r.error.message); else if(b.dataset.prog === "mark") award("lesson", 10, id);
+    loadStudentLessons(user);
+  });
+}
+async function showTeacher(p, user){
+  const opts = (p.subjects && p.subjects.length) ? p.subjects : SUBJECTS;
+  app.innerHTML = `<h1>Welcome, ${esc(p.name || p.full_name || "")}</h1>
+  ${await profileCard(p)}
+  <div class="row"><h2 style="margin:0">Live classes</h2><button id="nc" style="margin:0">Create class</button></div>
+  <div id="liveform"></div><div id="livelist" class="mut">Loading…</div>
+  <div class="row"><h2 style="margin:0">Your lessons</h2><button id="np" style="margin:0">Post a lesson</button></div>
+  <div id="formbox"></div><div id="list" class="mut">Loading…</div>`;
+  wireEdit(p, user);
+  wireLive(p, user);
+  np.onclick = () => {
+    if(formbox.innerHTML){ formbox.innerHTML = ""; return; }
+    formbox.innerHTML = `<div class="card" style="margin-top:12px"><h2 style="margin-top:0">Add a lesson</h2>
+    <label for="sj">Subject</label><select id="sj"><option value="">General (all subjects)</option>${opts.map(x => `<option>${esc(x)}</option>`).join("")}</select>
+    <label for="t">Title</label><input id="t">
+    <label for="d">Description (optional)</label><textarea id="d" rows="3"></textarea>
+    <label for="v">Video link (YouTube, optional)</label><input id="v" type="url" placeholder="https://youtube.com/watch?v=…">
+    <label for="f">Learning material (PDF, document, image — optional)</label><input id="f" type="file">
+    <button id="post">Post lesson</button><div class="msg" id="m" role="status"></div></div>`;
+    document.getElementById("post").onclick = async () => {
+      const title = t.value.trim();
+      if(!title) return say("Please add a title.", true);
+      say("Posting…");
+      let file_url = null;
+      const file = f.files[0];
+      if(file){
+        if(file.size > 50*1024*1024) return say("File is over 50 MB. Upload large videos to YouTube and paste the link instead.", true);
+        const path = `${user.id}/${Date.now()}-${file.name.replace(/[^\w.-]/g, "_")}`;
+        const up = await sb.storage.from("materials").upload(path, file);
+        if(up.error) return say("Upload failed: " + up.error.message, true);
+        file_url = path;
+      }
+      const { error } = await sb.from("lessons").insert({ teacher_id: user.id, subject: sj.value || null, title, description: d.value.trim() || null, video_url: v.value.trim() || null, file_url });
+      if(error) return say(error.message, true);
+      say("Lesson posted.");
+      loadMine(user);
+      setTimeout(() => { formbox.innerHTML = ""; }, 1200);
+    };
+  };
+  loadMine(user);
+}
+async function loadMine(user){
+  const { data, error } = await sb.from("lessons").select("*").eq("teacher_id", user.id).order("created_at", { ascending: false });
+  const list = document.getElementById("list");
+  if(error) return list.textContent = error.message;
+  if(!data.length) return list.textContent = "You haven't posted any lessons yet.";
+  list.className = "";
+  const { data: pr } = await sb.from("lesson_progress").select("lesson_id");
+  const cnt = {};
+  (pr || []).forEach(r => { cnt[String(r.lesson_id)] = (cnt[String(r.lesson_id)] || 0) + 1; });
+  list.innerHTML = (await Promise.all(data.map(l => lessonHtml(l, true, { count: cnt[String(l.id)] || 0 })))).join("");
+  list.querySelectorAll(".del").forEach(b => b.onclick = async () => {
+    if(!confirm("Delete this lesson?")) return;
+    await sb.from("lessons").delete().eq("id", b.dataset.id);
+    loadMine(user);
+  });
+}
+
+/* ---------- Tests and assignments ---------- */
+const fmtDT = d => new Date(d).toLocaleString([], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+async function showTests(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav("tests");
+  window.scrollTo(0, 0);
+  const r = me.p.role === "teacher" ? teacherTests() : studentTests();
+  ptabs("tests");
+  return r;
+}
+async function studentTests(){
+  const { user } = me;
+  app.innerHTML = `<h1>Tests &amp; assignments</h1><div id="tl" class="mut">Loading…</div>`;
+  const [a, b] = await Promise.all([
+    sb.from("tests").select("*").order("created_at", { ascending: false }),
+    sb.from("test_submissions").select("*").eq("student_id", user.id)]);
+  const box = document.getElementById("tl");
+  if(!box) return;
+  if(a.error) return box.textContent = a.error.message;
+  if(!a.data.length) return box.textContent = "No tests or assignments for you yet.";
+  const done = Object.fromEntries((b.data || []).map(s => [s.test_id, s]));
+  box.className = "";
+  box.innerHTML = a.data.map(t => {
+    const s = done[t.id], late = t.due_at && new Date(t.due_at) < new Date();
+    const st = s ? (s.status === "marked" ? `Score: ${s.auto_score + (s.manual_score || 0)} / ${s.total_marks}` : "Submitted, awaiting marking") : (late ? "Closed" : "Not done");
+    return `<div class="card"><b>${esc(t.title)}</b>
+      <div><span class="chip">${esc(t.kind)}</span>${t.subject ? `<span class="chip">${esc(t.subject)}</span>` : ""}<span class="chip">${esc(st)}</span></div>
+      ${t.due_at ? `<div class="mut">Due ${esc(fmtDT(t.due_at))}</div>` : ""}<div class="mut">By ${esc(t.teacher_name || "your teacher")}</div>
+      ${s || !late ? `<button data-id="${t.id}">${s ? "View result" : "Start"}</button>` : ""}</div>`;
+  }).join("");
+  box.querySelectorAll("button").forEach(x => x.onclick = () => openTest(a.data.find(t => t.id === x.dataset.id), done[x.dataset.id]));
+}
+async function openTest(t, s){
+  app.innerHTML = `<button class="link" id="tb">← Back</button><h1>${esc(t.title)}</h1><div id="tq" class="mut">Loading…</div>`;
+  document.getElementById("tb").onclick = showTests;
+  const { data: qs, error } = await sb.from("test_questions").select("*").eq("test_id", t.id).order("position");
+  const box = document.getElementById("tq");
+  if(error) return box.textContent = error.message;
+  const mine = s ? s.answers || {} : {};
+  const head = s ? `<div class="card" style="border-color:var(--acc)">${s.status === "marked"
+    ? `<b>Your score: ${s.auto_score + (s.manual_score || 0)} / ${s.total_marks}</b>${s.comments ? `<div class="ans">${esc(s.comments)}</div>` : ""}`
+    : `<b>Submitted.</b> Your teacher will mark the written answers.`}</div>` : "";
+  box.className = "";
+  box.innerHTML = head + qs.map((q, i) => `<div class="card"><b>${i + 1}. ${esc(q.question)}</b> <span class="mut">(${q.marks} mark${q.marks > 1 ? "s" : ""})</span>
+    ${q.kind === "mcq" ? q.options.map((o, j) => `<label class="opt"><input type="radio" name="q_${q.id}" value="${j}"${s ? " disabled" : ""}${mine[q.id] === String(j) ? " checked" : ""}> ${letters[j]}. ${esc(o)}</label>`).join("")
+      : `<textarea rows="4" data-q="${q.id}" placeholder="Write your answer…"${s ? " disabled" : ""}>${esc(mine[q.id] || "")}</textarea>`}</div>`).join("")
+    + (s ? "" : `<button id="ts2" style="width:100%">Submit</button><div class="msg" id="m"></div>`);
+  if(s) return;
+  document.getElementById("ts2").onclick = async () => {
+    const ans = {};
+    qs.forEach(q => {
+      if(q.kind === "mcq"){ const r = box.querySelector(`input[name="q_${q.id}"]:checked`); if(r) ans[q.id] = r.value; }
+      else ans[q.id] = box.querySelector(`textarea[data-q="${q.id}"]`).value.trim();
+    });
+    if(!confirm("Submit your answers? You cannot change them after this.")) return;
+    const { error: e } = await sb.rpc("submit_test", { p_test: t.id, p_answers: ans });
+    if(e) return say(e.message, true);
+    award("test", 15, t.id);
+    showTests();
+  };
+}
+const letters = ["A", "B", "C", "D"];
+async function teacherTests(){
+  app.innerHTML = `<div class="row"><h1 style="margin:0">Tests &amp; assignments</h1><button id="nt" style="margin:0">Create</button></div>
+    <div id="tf"></div><div id="tl" class="mut">Loading…</div>`;
+  document.getElementById("nt").onclick = testForm;
+  loadMyTests();
+}
+async function loadMyTests(){
+  const { data, error } = await sb.from("tests").select("*, test_submissions(count)").eq("teacher_id", me.user.id).order("created_at", { ascending: false });
+  const box = document.getElementById("tl");
+  if(!box) return;
+  if(error) return box.textContent = error.message;
+  if(!data.length) return box.textContent = "Nothing yet. Tap Create to make your first test or assignment.";
+  box.className = "";
+  box.innerHTML = data.map(t => `<div class="card"><b>${esc(t.title)}</b>
+    <div><span class="chip">${esc(t.kind)}</span>${t.subject ? `<span class="chip">${esc(t.subject)}</span>` : ""}<span class="chip">${esc(t.study_group || "All students")}</span></div>
+    <div class="mut">${t.test_submissions?.[0]?.count || 0} submitted${t.due_at ? " · Due " + esc(fmtDT(t.due_at)) : ""}</div>
+    <button data-a="sub" data-id="${t.id}">Submissions &amp; marking</button> <button class="del" data-a="del" data-id="${t.id}">Delete</button></div>`).join("");
+  box.querySelectorAll("button").forEach(b => b.onclick = async () => {
+    const t = data.find(x => x.id === b.dataset.id);
+    if(b.dataset.a === "sub") return viewSubs(t);
+    if(!confirm("Delete this test and all its submissions?")) return;
+    await sb.from("tests").delete().eq("id", t.id);
+    loadMyTests();
+  });
+}
+function qBlock(kind){
+  const d = document.createElement("div");
+  d.className = "qb"; d.dataset.k = kind;
+  d.innerHTML = `<b>${kind === "mcq" ? "Multiple choice" : "Written question"}</b> <button class="link" data-x="1" style="float:right">Remove</button>
+    <textarea class="qt" rows="2" placeholder="Question"></textarea>
+    ${kind === "mcq" ? [0, 1, 2, 3].map(i => `<input class="qo" placeholder="Option ${letters[i]}" style="margin-top:6px">`).join("")
+      + `<label>Correct answer</label><select class="qa">${letters.map((l, i) => `<option value="${i}">${l}</option>`).join("")}</select>` : ""}
+    <label>Marks</label><input class="qm" type="number" min="1" value="${kind === "mcq" ? 1 : 5}">`;
+  d.querySelector("[data-x]").onclick = () => d.remove();
+  return d;
+}
+function testForm(){
+  const opts = (me.p.subjects && me.p.subjects.length) ? me.p.subjects : SUBJECTS;
+  document.getElementById("tf").innerHTML = `<section class="card"><h2 style="margin-top:0">New test or assignment</h2>
+    <label for="tt">Title</label><input id="tt" maxlength="120">
+    <label for="tk">Type</label><select id="tk"><option>Test</option><option>Assignment</option></select>
+    <label for="tsub">Subject</label><select id="tsub">${opts.map(x => `<option>${esc(x)}</option>`).join("")}</select>
+    <label for="tg">For which students?</label><select id="tg"><option value="">All students</option>${GROUPS.flatMap(g => g[1]).map(x => `<option>${x}</option>`).join("")}</select>
+    <label for="td">Deadline (optional)</label><input id="td" type="datetime-local">
+    <div id="qs"></div>
+    <button id="aq" class="ghost" style="color:var(--pri);border-color:var(--pri)">+ Multiple choice</button> <button id="aw" class="ghost" style="color:var(--pri);border-color:var(--pri)">+ Written question</button><br>
+    <button id="sv">Save</button> <button class="link" id="cx" style="margin-left:12px">Cancel</button><div class="msg" id="m"></div></section>`;
+  const qs = document.getElementById("qs");
+  document.getElementById("aq").onclick = () => qs.appendChild(qBlock("mcq"));
+  document.getElementById("aw").onclick = () => qs.appendChild(qBlock("written"));
+  document.getElementById("cx").onclick = () => document.getElementById("tf").innerHTML = "";
+  qs.appendChild(qBlock("mcq"));
+  document.getElementById("sv").onclick = async () => {
+    const title = document.getElementById("tt").value.trim();
+    const list = [...qs.querySelectorAll(".qb")].map((b, i) => ({ kind: b.dataset.k, position: i, question: b.querySelector(".qt").value.trim(),
+      options: b.dataset.k === "mcq" ? [...b.querySelectorAll(".qo")].map(x => x.value.trim()) : null,
+      key: b.dataset.k === "mcq" ? b.querySelector(".qa").value : null, marks: Math.max(1, parseInt(b.querySelector(".qm").value) || 1) }));
+    if(!title) return say("Please enter a title.", true);
+    if(!list.length) return say("Add at least one question.", true);
+    if(list.some(q => !q.question || (q.options && q.options.some(o => !o)))) return say("Fill in every question and every option.", true);
+    say("Saving…");
+    const dv = document.getElementById("td").value;
+    const { data: t, error } = await sb.from("tests").insert({ teacher_id: me.user.id, teacher_name: me.p.name || me.p.full_name, title,
+      kind: document.getElementById("tk").value, subject: document.getElementById("tsub").value,
+      study_group: document.getElementById("tg").value || null, due_at: dv ? new Date(dv).toISOString() : null }).select().single();
+    if(error) return say(error.message, true);
+    const { data: qr, error: e2 } = await sb.from("test_questions").insert(list.map(({ key, ...q }) => ({ ...q, test_id: t.id }))).select("id, position");
+    if(e2){ await sb.from("tests").delete().eq("id", t.id); return say(e2.message, true); }
+    const keys = qr.filter(r => list[r.position].kind === "mcq").map(r => ({ question_id: r.id, answer: list[r.position].key }));
+    if(keys.length){
+      const { error: e3 } = await sb.from("test_keys").insert(keys);
+      if(e3){ await sb.from("tests").delete().eq("id", t.id); return say(e3.message, true); }
+    }
+    teacherTests();
+  };
+}
+async function viewSubs(t){
+  app.innerHTML = `<button class="link" id="tb">← Back</button><h1>${esc(t.title)}</h1><div id="sl" class="mut">Loading…</div>`;
+  document.getElementById("tb").onclick = showTests;
+  const [a, b] = await Promise.all([sb.from("test_questions").select("*").eq("test_id", t.id).order("position"),
+    sb.from("test_submissions").select("*").eq("test_id", t.id).order("submitted_at")]);
+  const box = document.getElementById("sl");
+  if(a.error || b.error) return box.textContent = (a.error || b.error).message;
+  if(!b.data.length) return box.textContent = "No submissions yet.";
+  const wq = a.data.filter(q => q.kind === "written"), wmax = wq.reduce((n, q) => n + q.marks, 0);
+  box.className = "";
+  box.innerHTML = b.data.map(s => `<div class="card"><b>${esc(s.student_name || "Student")}</b> <span class="chip">${s.status === "marked" ? "Marked" : "Needs marking"}</span>
+    <div class="mut">Multiple choice: ${s.auto_score} / ${s.total_marks - wmax}</div>
+    ${wq.map(q => `<div style="margin-top:8px"><b>${esc(q.question)}</b> <span class="mut">(${q.marks})</span><div class="ans">${esc((s.answers || {})[q.id] || "(no answer)")}</div></div>`).join("")}
+    ${wmax ? `<label>Score for written answers (out of ${wmax})</label><input type="number" min="0" max="${wmax}" data-s="${s.id}" value="${s.manual_score ?? ""}">` : ""}
+    <label>Comment for the student</label><textarea rows="2" data-c="${s.id}">${esc(s.comments || "")}</textarea>
+    <button data-id="${s.id}">Save mark</button> <span class="mut" data-r="${s.id}"></span></div>`).join("");
+  box.querySelectorAll("button[data-id]").forEach(btn => btn.onclick = async () => {
+    const id = btn.dataset.id, inp = box.querySelector(`[data-s="${id}"]`), r = box.querySelector(`[data-r="${id}"]`);
+    const v = inp ? Math.min(wmax, Math.max(0, parseInt(inp.value) || 0)) : 0;
+    const { error } = await sb.from("test_submissions").update({ manual_score: v, comments: box.querySelector(`[data-c="${id}"]`).value.trim() || null, status: "marked" }).eq("id", id);
+    r.textContent = error ? error.message : "Saved ✓";
+  });
+}
+
+/* ---------- Practice questions ---------- */
+function ptabs(on){
+  const t = [["tests", "Tests"], ["practice", "Practice"], ["mock", "Mock"], ["rewards", "Rewards"], ["library", "Library"]];
+  app.insertAdjacentHTML("afterbegin", `<div class="tabs five pt ${me.p.role === "teacher" ? "t" : ""}">${t.map(([v, l]) => `<button data-v="${v}" class="${on === v ? "on" : ""}">${l}</button>`).join("")}</div>`);
+  app.querySelectorAll(".tabs button[data-v]").forEach(bt => bt.onclick = () => bt.dataset.v === "tests" ? showTests() : bt.dataset.v === "mock" ? showMock() : bt.dataset.v === "rewards" ? showRewards() : bt.dataset.v === "library" ? showLibrary() : showPractice());
+}
+async function showPractice(){
+  leaveChat();
+  if(!me) return showChatGate();
+  const staff = me.admin || me.p.role === "teacher";
+  drawSubnav(me.admin ? "practice" : "tests");
+  window.scrollTo(0, 0);
+  const so = SUBJECTS.map(x => `<option>${esc(x)}</option>`).join("");
+  app.innerHTML = `<h1>Practice questions</h1><section class="card"><label for="ps">Choose a subject</label><select id="ps">${so}</select>
+    <button id="pgo">Start practice</button><div class="msg" id="m"></div></section><div id="pq"></div>
+    ${staff ? `<section class="card"><h2 style="margin-top:0">Add a practice question</h2><label>Subject</label><select id="xs">${so}</select>
+    <label>Topic (optional)</label><input id="xt"><label>Question</label><textarea id="xq" rows="2"></textarea>
+    ${[0, 1, 2, 3].map(i => `<input class="xo" placeholder="Option ${letters[i]}" style="margin-top:6px">`).join("")}
+    <label>Correct answer</label><select id="xc">${letters.map((l, i) => `<option value="${i}">${l}</option>`).join("")}</select>
+    <label>Short explanation (optional)</label><textarea id="xe" rows="2"></textarea><button id="xv">Save question</button><div class="msg" id="xm"></div></section>` : ""}`;
+  ptabs("practice");
+  const box = document.getElementById("pq");
+  document.getElementById("pgo").onclick = async () => {
+    say("Loading…");
+    const { data, error } = await sb.from("practice_questions").select("*").eq("subject", document.getElementById("ps").value).limit(300);
+    if(error) return say(error.message, true);
+    if(!data.length) return say("No questions for this subject yet.", true);
+    const qs = data.sort(() => Math.random() - .5).slice(0, 10);
+    let i = 0, score = 0;
+    say("");
+    const show = () => {
+      if(i >= qs.length){
+        box.innerHTML = `<div class="card" style="text-align:center"><h2 style="margin-top:0">${score} / ${qs.length}</h2><p>${score >= qs.length * .7 ? "Well done!" : "Keep practising, you will improve."}</p><button id="pr">Practise again</button></div>`;
+        if(score > 0) award("practice", Math.min(score * 2, 20));
+        document.getElementById("pr").onclick = () => document.getElementById("pgo").click();
+        return;
+      }
+      const q = qs[i];
+      box.innerHTML = `<div class="card"><div class="mut">Question ${i + 1} of ${qs.length}${q.topic ? " · " + esc(q.topic) : ""}</div><b>${esc(q.question)}</b>
+        ${q.options.map((o, j) => `<button class="opt2" data-j="${j}">${letters[j]}. ${esc(o)}</button>`).join("")}<div id="fb"></div></div>`;
+      let answered = false;
+      box.querySelectorAll(".opt2").forEach(b => b.onclick = () => {
+        if(answered) return;
+        answered = true;
+        const j = +b.dataset.j;
+        if(j === q.answer) score++;
+        box.querySelectorAll(".opt2").forEach(x => { const k = +x.dataset.j; if(k === q.answer) x.classList.add("good"); else if(k === j) x.classList.add("bad"); });
+        document.getElementById("fb").innerHTML = `<p><b>${j === q.answer ? "Correct!" : "Not quite. The answer is " + letters[q.answer] + "."}</b>${q.explanation ? "<br>" + esc(q.explanation) : ""}</p><button id="nx">${i + 1 < qs.length ? "Next" : "See my score"}</button>`;
+        document.getElementById("nx").onclick = () => { i++; show(); };
+      });
+    };
+    show();
+  };
+  if(staff) document.getElementById("xv").onclick = async () => {
+    const xm = document.getElementById("xm"), opts = [...app.querySelectorAll(".xo")].map(x => x.value.trim()), q = document.getElementById("xq").value.trim();
+    if(!q || opts.some(o => !o)){ xm.className = "msg err"; return xm.textContent = "Fill in the question and all four options."; }
+    const { error } = await sb.from("practice_questions").insert({ subject: document.getElementById("xs").value, topic: document.getElementById("xt").value.trim() || null,
+      question: q, options: opts, answer: +document.getElementById("xc").value, explanation: document.getElementById("xe").value.trim() || null });
+    xm.className = "msg " + (error ? "err" : "ok");
+    xm.textContent = error ? error.message : "Saved ✓";
+    if(!error){ document.getElementById("xq").value = ""; document.getElementById("xe").value = ""; app.querySelectorAll(".xo").forEach(x => x.value = ""); }
+  };
+}
+
+/* ---------- Mock exam (CBT) ---------- */
+let mockTimer = null;
+function stopMock(){ if(mockTimer){ clearInterval(mockTimer); mockTimer = null; } }
+const fmtSecs = n => Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0");
+async function showMock(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav(me.admin ? "practice" : "tests");
+  window.scrollTo(0, 0);
+  const staff = me.admin || me.p.role === "teacher";
+  const others = SUBJECTS.filter(x => x !== "English Language");
+  app.innerHTML = `<h1>Mock exam</h1><section class="card">
+    <label for="mm">Type of mock</label><select id="mm"><option value="jamb">JAMB mock: English + 3 subjects</option><option value="one">Single subject</option></select>
+    <div id="mj"><label>Choose 3 subjects (English Language is included)</label>${others.map(x => `<label class="ckrow"><input type="checkbox" class="mjc" value="${esc(x)}"> ${esc(x)}</label>`).join("")}</div>
+    <div id="mo" class="hide"><label for="ms">Subject</label><select id="ms">${SUBJECTS.map(x => `<option>${esc(x)}</option>`).join("")}</select></div>
+    <p class="mut">Timed like the real exam: 40 seconds per question. Move between questions with the number palette. The exam submits by itself when time is up. Do not leave this page while the exam is running.</p>
+    <button id="mgo">Start mock exam</button><div class="msg" id="m"></div></section><div id="mh"></div>`;
+  ptabs("mock");
+  const mm = document.getElementById("mm");
+  mm.onchange = () => {
+    document.getElementById("mj").classList.toggle("hide", mm.value !== "jamb");
+    document.getElementById("mo").classList.toggle("hide", mm.value === "jamb");
+  };
+  app.querySelectorAll(".mjc").forEach(c => c.onchange = () => {
+    if(app.querySelectorAll(".mjc:checked").length > 3){ c.checked = false; say("You can choose only 3 subjects.", true); } else say("");
+  });
+  document.getElementById("mgo").onclick = async () => {
+    let subs;
+    if(mm.value === "jamb"){
+      const ch = [...app.querySelectorAll(".mjc:checked")].map(x => x.value);
+      if(ch.length !== 3) return say("Please choose exactly 3 subjects.", true);
+      subs = ["English Language", ...ch];
+    } else subs = [document.getElementById("ms").value];
+    say("Preparing your exam…");
+    const res = await Promise.all(subs.map(x => sb.from("practice_questions").select("*").eq("subject", x).limit(300)));
+    const bad = res.find(r => r.error);
+    if(bad) return say(bad.error.message, true);
+    const sections = subs.map((x, i) => ({ subject: x, qs: res[i].data.sort(() => Math.random() - .5).slice(0, 40) }));
+    const empty = sections.find(x => !x.qs.length);
+    if(empty) return say("No questions for " + empty.subject + " yet.", true);
+    runMock(mm.value, sections);
+  };
+  const { data, error } = await sb.from("mock_results").select("*").order("created_at", { ascending: false }).limit(20);
+  const mh = document.getElementById("mh");
+  if(!mh || error || !data || !data.length) return;
+  mh.innerHTML = `<h2>${staff ? "Recent mock results" : "My recent mocks"}</h2>` + data.map(r => `<div class="card"><b>${r.mode === "jamb" ? "JAMB mock" : esc((r.subjects || [])[0] || "Mock")}</b>
+    <div class="mut">${esc(fmtDT(r.created_at))}${staff ? " · " + esc(r.user_name || "Student") + (r.study_group ? " (" + esc(r.study_group) + ")" : "") : ""}</div>
+    <div><span class="chip">${r.score} / ${r.total}</span>${r.jamb_score != null ? `<span class="chip">JAMB-style ${r.jamb_score} / 400</span>` : ""}</div></div>`).join("");
+}
+function runMock(mode, sections){
+  stopMock();
+  subnav.innerHTML = "";
+  window.scrollTo(0, 0);
+  const all = [], start = [];
+  sections.forEach((x, si) => { start.push(all.length); x.qs.forEach(q => all.push({ si, q })); });
+  const total = all.length, secs = total * 40, endAt = Date.now() + secs * 1000;
+  const ans = all.map(() => null);
+  let cur = 0, finished = false;
+  const left = () => Math.max(0, Math.round((endAt - Date.now()) / 1000));
+  app.innerHTML = `<div class="mockbar"><b id="mt">${fmtSecs(secs)}</b><span class="mut" id="mc"></span><button id="msub">Submit</button></div>
+    ${sections.length > 1 ? `<div class="tabs" id="mtabs">${sections.map((x, i) => `<button data-s="${i}">${esc(x.subject)}</button>`).join("")}</div>` : ""}
+    <div id="mq"></div><div class="pal" id="mpal"></div>`;
+  const draw = () => {
+    const { si, q } = all[cur], n = sections[si].qs.length, pos = cur - start[si] + 1;
+    document.getElementById("mc").textContent = ans.filter(a => a !== null).length + " / " + total + " answered";
+    document.getElementById("mq").innerHTML = `<div class="card"><div class="mut">${esc(sections[si].subject)} · Question ${pos} of ${n}</div><b>${esc(q.question)}</b>
+      ${q.options.map((o, j) => `<button class="opt2 ${ans[cur] === j ? "sel" : ""}" data-j="${j}">${letters[j]}. ${esc(o)}</button>`).join("")}
+      <div class="mnav"><button class="sec" id="mprev" ${cur === 0 ? "disabled" : ""}>Previous</button><button id="mnext" ${cur === total - 1 ? "disabled" : ""}>Next</button></div></div>`;
+    document.querySelectorAll("#mq .opt2").forEach(b => b.onclick = () => { ans[cur] = +b.dataset.j; draw(); });
+    document.getElementById("mprev").onclick = () => { cur--; draw(); window.scrollTo(0, 0); };
+    document.getElementById("mnext").onclick = () => { cur++; draw(); window.scrollTo(0, 0); };
+    document.getElementById("mpal").innerHTML = sections[si].qs.map((_, k) => { const idx = start[si] + k;
+      return `<button data-i="${idx}" class="${idx === cur ? "cur" : ""} ${ans[idx] !== null ? "done" : ""}">${k + 1}</button>`; }).join("");
+    document.querySelectorAll("#mpal button").forEach(b => b.onclick = () => { cur = +b.dataset.i; draw(); window.scrollTo(0, 0); });
+    document.querySelectorAll("#mtabs button").forEach(b => b.classList.toggle("on", +b.dataset.s === si));
+  };
+  document.querySelectorAll("#mtabs button").forEach(b => b.onclick = () => { cur = start[+b.dataset.s]; draw(); window.scrollTo(0, 0); });
+  const finish = async auto => {
+    if(finished) return;
+    finished = true; stopMock();
+    const used = secs - left();
+    const per = sections.map((x, i) => { let c = 0; x.qs.forEach((q, k) => { if(ans[start[i] + k] === q.answer) c++; }); return { subject: x.subject, correct: c, total: x.qs.length }; });
+    const score = per.reduce((a, p) => a + p.correct, 0);
+    const jamb = mode === "jamb" ? Math.round(per.reduce((a, p) => a + p.correct / p.total * 100, 0)) : null;
+    const wrong = all.map((x, i) => ({ ...x, i })).filter(x => ans[x.i] !== x.q.answer);
+    drawSubnav(me.admin ? "practice" : "tests");
+    window.scrollTo(0, 0);
+    app.innerHTML = `<h1>Your result</h1><div class="card" style="text-align:center"><h2 style="margin:0;font-size:40px">${score} / ${total}</h2>
+      <p style="margin:6px 0">${Math.round(score / total * 100)}%${auto ? " · time was up" : ""}</p>
+      ${jamb !== null ? `<p style="margin:6px 0"><b>JAMB-style score: ${jamb} / 400</b></p>` : ""}
+      <p class="mut" style="margin:6px 0">Time used: ${fmtSecs(used)}</p>
+      <p>${score >= total * .7 ? "Excellent work!" : score >= total * .5 ? "Good effort. Keep practising." : "Do not give up. Review the answers below and try again."}</p></div>
+      ${per.length > 1 ? `<div class="card">${per.map(p => `<div style="margin-bottom:12px"><b>${esc(p.subject)}</b> <span class="mut">${p.correct} / ${p.total}</span><div class="mbar"><i style="width:${Math.round(p.correct / p.total * 100)}%"></i></div></div>`).join("")}</div>` : ""}
+      <div class="msg" id="m"></div>
+      <div class="card"><b>Review: ${wrong.length} to learn from</b>${wrong.length ? wrong.map(x => `<div class="mrev"><div class="mut">${esc(sections[x.si].subject)}</div><b>${esc(x.q.question)}</b>
+        <div>Your answer: ${ans[x.i] === null ? "not answered" : letters[ans[x.i]] + ". " + esc(x.q.options[ans[x.i]])}</div>
+        <div><b>Correct: ${letters[x.q.answer]}. ${esc(x.q.options[x.q.answer])}</b></div>${x.q.explanation ? `<div class="mut">${esc(x.q.explanation)}</div>` : ""}</div>`).join("") : "<p>You got everything right!</p>"}</div>
+      <button id="magain">Take another mock</button>`;
+    ptabs("mock");
+    document.getElementById("magain").onclick = showMock;
+    const { error } = await sb.from("mock_results").insert({ user_id: me.user.id, user_name: me.p.name || me.p.full_name || null, study_group: me.p.study_group || null,
+      mode, subjects: per.map(p => p.subject), per_subject: per, score, total, jamb_score: jamb, seconds_used: used });
+    say(error ? "Your result could not be saved: " + error.message : "Result saved ✓", !!error);
+    await award("mock", score + 10);
+    if(score >= total * .7) await award("mock_bonus", 20);
+  };
+  document.getElementById("msub").onclick = () => {
+    const un = ans.filter(a => a === null).length;
+    if(confirm(un ? `You have ${un} unanswered question${un > 1 ? "s" : ""}. Submit now?` : "Submit your exam now?")) finish(false);
+  };
+  const tick = () => { const l = left(), t = document.getElementById("mt"); if(!t) return stopMock(); t.textContent = fmtSecs(l); t.className = l <= 60 ? "low" : ""; if(l <= 0) finish(true); };
+  mockTimer = setInterval(tick, 1000);
+  draw();
+}
+
+/* ---------- Points, streaks, badges and leaderboard ---------- */
+const isStudent = () => !!me && !me.admin && me.p.role !== "teacher";
+function toast(t){
+  let el = document.getElementById("toast");
+  if(!el){ el = document.createElement("div"); el.id = "toast"; document.body.appendChild(el); }
+  el.textContent = t; el.className = "show";
+  clearTimeout(toast.t); toast.t = setTimeout(() => { el.className = ""; }, 2600);
+}
+async function award(reason, pts, ref){
+  try {
+    if(!isStudent() || !(pts > 0)) return;
+    const row = { user_id: me.user.id, user_name: me.p.name || me.p.full_name || "Student", study_group: me.p.study_group || null,
+      reason, points: Math.round(pts), ref: String(ref || (Date.now() + "-" + Math.random().toString(36).slice(2))) };
+    const { data, error } = await sb.from("points_log").upsert(row, { onConflict: "user_id,reason,ref", ignoreDuplicates: true }).select();
+    if(!error && data && data.length) toast("+" + row.points + " points ⭐");
+  } catch(e){}
+}
+function rewardStats(rows){
+  const n = { lesson: 0, practice: 0, mock: 0, mock_bonus: 0, test: 0 };
+  let total = 0, week = 0;
+  const wk = Date.now() - 7 * 864e5;
+  let earned = 0;
+  rows.forEach(r => { total += r.points; if(r.points > 0) earned += r.points; if(new Date(r.created_at).getTime() >= wk) week += r.points; if(n[r.reason] !== undefined) n[r.reason]++; });
+  const dn = d => Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5);
+  const days = [...new Set(rows.map(r => dn(new Date(r.created_at))))].sort((a, b) => a - b);
+  let best = 0, run = 0;
+  days.forEach((d, i) => { run = i && d === days[i - 1] + 1 ? run + 1 : 1; if(run > best) best = run; });
+  const set = new Set(days), today = set.has(dn(new Date()));
+  let t = dn(new Date()), streak = 0;
+  if(!today) t--;
+  while(set.has(t)){ streak++; t--; }
+  return { total, earned, week, n, best, streak, today };
+}
+const BADGES = [
+  ["🌱", "First steps", "Earn your first points", s => s.earned > 0],
+  ["⭐", "100 club", "Reach 100 points", s => s.earned >= 100],
+  ["🏆", "500 club", "Reach 500 points", s => s.earned >= 500],
+  ["👑", "1000 club", "Reach 1000 points", s => s.earned >= 1000],
+  ["🔥", "3-day streak", "Learn 3 days in a row", s => s.best >= 3],
+  ["⚡", "7-day streak", "Learn 7 days in a row", s => s.best >= 7],
+  ["📚", "Lesson learner", "Finish 5 lessons", s => s.n.lesson >= 5],
+  ["🧠", "Practice pro", "Do 5 practice sessions", s => s.n.practice >= 5],
+  ["📝", "Mock starter", "Finish a mock exam", s => s.n.mock >= 1],
+  ["🎯", "Sharp shooter", "Score 70% in a mock exam", s => s.n.mock_bonus >= 1]
+];
+async function rewardStrip(){
+  const box = document.getElementById("rwstrip");
+  if(!box) return;
+  const { data } = await sb.from("points_log").select("reason,points,created_at").eq("user_id", me.user.id).limit(2000);
+  if(!document.getElementById("rwstrip")) return;
+  const s = rewardStats(data || []);
+  box.innerHTML = `<button id="rwb" style="display:block;width:100%;text-align:left;color:var(--ink);background:#fff;border:1.5px solid var(--acc);border-radius:14px;margin:0 0 14px"><b>⭐ ${s.total} points · 🔥 ${s.streak}-day streak</b>
+    <div class="mut" style="font-weight:400">${s.streak > 0 && !s.today ? "Do one lesson or practice today to keep your streak alive." : "Tap to see your badges and the leaderboard."}</div></button>`;
+  document.getElementById("rwb").onclick = showRewards;
+}
+async function showRewards(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav(me.admin ? "practice" : "tests");
+  window.scrollTo(0, 0);
+  const stu = isStudent(), grpName = me.p.study_group;
+  app.innerHTML = `<h1>Rewards</h1><div id="rmine"></div><h2>Leaderboard</h2><section class="card">
+    <div class="tabs" id="lbw"><button data-d="7" class="on">This week</button><button data-d="0">All time</button></div>
+    ${stu && grpName ? `<div class="tabs" id="lbg"><button data-g="" class="on">Everyone</button><button data-g="${esc(grpName)}">${esc(grpName)}</button></div>` : ""}
+    <div id="lb" class="mut">Loading…</div></section>`;
+  ptabs("rewards");
+  let days = 7, grp = "";
+  const loadLb = async () => {
+    const box = document.getElementById("lb");
+    if(!box) return;
+    box.className = "mut"; box.textContent = "Loading…";
+    const { data, error } = await sb.rpc("get_leaderboard", { p_days: days, p_group: grp || null });
+    if(error) return box.textContent = error.message;
+    if(!data.length) return box.textContent = "No points yet. Be the first!";
+    box.className = "";
+    box.innerHTML = data.map((r, i) => `<div class="lb ${r.is_me ? "me" : ""}"><span class="rk">${["🥇", "🥈", "🥉"][i] || "#" + (i + 1)}</span>
+      <span class="nm"><b>${esc(r.pname || "Student")}${r.is_me ? " (you)" : ""}</b>${r.pgroup ? `<small>${esc(r.pgroup)}</small>` : ""}</span><b>${r.pts}</b></div>`).join("");
+  };
+  const wire = (id, key) => document.querySelectorAll("#" + id + " button").forEach(b => b.onclick = () => {
+    document.querySelectorAll("#" + id + " button").forEach(x => x.classList.toggle("on", x === b));
+    if(key === "d") days = +b.dataset.d; else grp = b.dataset.g;
+    loadLb();
+  });
+  wire("lbw", "d"); wire("lbg", "g");
+  loadLb();
+  if(!stu) return;
+  const { data: rows } = await sb.from("points_log").select("reason,points,created_at").eq("user_id", me.user.id).order("created_at", { ascending: false }).limit(2000);
+  const mine = document.getElementById("rmine");
+  if(!mine) return;
+  const s = rewardStats(rows || []);
+  mine.innerHTML = `<div class="rstats"><div><b>${s.total}</b>points</div><div><b>${s.streak}</b>day streak</div><div><b>${s.week}</b>this week</div></div>
+    <h2>My badges</h2><div class="badges">${BADGES.map(([ic, nm, how, ok]) => `<div class="badge ${ok(s) ? "" : "off"}"><span>${ic}</span><b>${nm}</b><div class="mut">${how}</div></div>`).join("")}</div>
+    ${certsHTML(s)}
+    <section class="card" style="margin-top:14px"><b>How to earn points</b>
+      <p class="mut" style="margin:6px 0 0">Finish a lesson: +10<br>Practice: +2 for each correct answer (up to 20)<br>Submit a test or assignment: +15<br>Mock exam: +1 for each correct answer, +10 for finishing, +20 for scoring 70% or more<br>Learn every day to build your streak 🔥</p></section>`;
+  const cname = me.p.name || me.p.full_name || "Student";
+  mine.querySelectorAll("button[data-cert]").forEach(b => b.onclick = async () => {
+    const c = CERTS.find(x => x[0] === +b.dataset.cert);
+    b.disabled = true; b.textContent = "Preparing…";
+    await downloadCert(c, cname, certDate(rows || [], c[0]), me.user.id);
+    b.disabled = false; b.textContent = "Get certificate";
+  });
+}
+
+
+/* ---------- Certificates ---------- */
+const CERTS = [
+  [100, "🥉", "Bronze Achiever", "for earning 100 points through consistent learning"],
+  [500, "🥈", "Silver Scholar", "for earning 500 points through dedication to learning"],
+  [1000, "🥇", "Gold Genius", "for earning 1000 points through outstanding commitment to learning"]
+];
+function certDate(rows, thr){
+  const asc = rows.filter(r => r.points > 0).sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+  let t = 0;
+  for(const r of asc){ t += r.points; if(t >= thr) return new Date(r.created_at); }
+  return new Date();
+}
+function certCanvas(c, name, date){
+  return new Promise(res => {
+    const W = 1600, H = 1130, cv = document.createElement("canvas");
+    cv.width = W; cv.height = H;
+    const g = cv.getContext("2d"), cx = W / 2;
+    const draw = img => {
+      g.fillStyle = "#fffdf6"; g.fillRect(0, 0, W, H);
+      g.strokeStyle = "#07503b"; g.lineWidth = 18; g.strokeRect(40, 40, W - 80, H - 80);
+      g.strokeStyle = "#f5a623"; g.lineWidth = 6; g.strokeRect(72, 72, W - 144, H - 144);
+      g.textAlign = "center"; g.fillStyle = "#07503b";
+      if(img) g.drawImage(img, cx - 55, 110, 110, 110);
+      g.font = "bold 36px Georgia, serif"; g.fillText("BRILLIANT MINDS TUTORIALS", cx, 270);
+      g.fillStyle = "#c98400"; g.font = "bold 92px Georgia, serif"; g.fillText("Certificate of Achievement", cx, 395);
+      g.fillStyle = "#4f6359"; g.font = "italic 36px Georgia, serif"; g.fillText("This certificate is proudly presented to", cx, 480);
+      let fs = 110; g.fillStyle = "#10241c";
+      do { g.font = "bold " + fs + "px Georgia, serif"; fs -= 4; } while(g.measureText(name).width > W - 330 && fs > 40);
+      g.fillText(name, cx, 620);
+      g.strokeStyle = "#f5a623"; g.lineWidth = 3; g.beginPath(); g.moveTo(cx - 380, 650); g.lineTo(cx + 380, 650); g.stroke();
+      g.fillStyle = "#4f6359"; g.font = "italic 36px Georgia, serif"; g.fillText(c[4], cx, 720);
+      g.fillStyle = "#07503b"; g.font = "bold 70px Georgia, serif"; g.fillText(c[1] + " " + c[2], cx, 820);
+      g.fillStyle = "#4f6359"; g.font = "30px Georgia, serif";
+      g.textAlign = "left"; g.fillText("Date: " + date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }), 150, 990);
+      g.textAlign = "right"; g.fillText("Certificate No: " + c[5], W - 150, 990);
+      g.textAlign = "center"; g.font = "italic 28px Georgia, serif"; g.fillText("Oluwapelumi Samuel Oyepeju, Founder", cx, 990);
+      g.strokeStyle = "#4f6359"; g.lineWidth = 2; g.beginPath(); g.moveTo(cx - 230, 955); g.lineTo(cx + 230, 955); g.stroke();
+      cv.toBlob(b => res(b), "image/png");
+    };
+    const img = new Image();
+    img.onload = () => draw(img); img.onerror = () => draw(null); img.src = LOGO;
+  });
+}
+async function downloadCert(c, name, date, uid){
+  const id = "BMT-" + String(uid).replace(/-/g, "").slice(0, 6).toUpperCase() + "-" + c[0];
+  // certCanvas expects [thr, medal, title, desc, desc, id]
+  const blob = await certCanvas([c[0], c[1], c[2], c[3], c[3], id], name, date);
+  if(!blob) return toast("Could not make the certificate. Try again.");
+  const file = new File([blob], "Certificate-" + c[2].replace(/ /g, "-") + ".png", { type: "image/png" });
+  try {
+    if(navigator.canShare && navigator.canShare({ files: [file] })){ await navigator.share({ files: [file], title: c[2] + " certificate" }); return; }
+  } catch(e){ if(e && e.name === "AbortError") return; }
+  const url = URL.createObjectURL(blob), a = document.createElement("a");
+  a.href = url; a.download = file.name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+  toast("Certificate saved 🎓");
+}
+function certsHTML(s){
+  return `<h2>My certificates</h2><p class="mut" style="margin:0 0 4px">Reach a points milestone to earn a certificate. Spending points in the Library never takes a certificate away.</p>`
+    + CERTS.map(c => { const ok = s.earned >= c[0], pct = Math.min(100, Math.round(s.earned / c[0] * 100));
+      return `<div class="cert ${ok ? "" : "off"}"><span class="ci">${c[1]}</span><div class="ct"><b>${c[2]}</b><div class="mut">${c[0]} points</div>${ok ? "" : `<div class="bar"><i style="width:${pct}%"></i></div><div class="mut">${s.earned} / ${c[0]}</div>`}</div>${ok ? `<button data-cert="${c[0]}">Get certificate</button>` : ""}</div>`; }).join("");
+}
+
+
+/* ---------- Announcements and timetable ---------- */
+const ALL_GROUPS = GROUPS.flatMap(g => g[1]);
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const isStaffUser = () => !!(me && (me.admin || me.p.role === "teacher"));
+const myName = () => me.p.name || me.p.full_name || (me.admin ? "Admin" : "Teacher");
+async function annStrip(){
+  const box = document.getElementById("annstrip");
+  if(!box) return;
+  const { data, error } = await sb.from("announcements").select("id,title,body,pinned,created_at").order("pinned", { ascending: false }).order("created_at", { ascending: false }).limit(1);
+  if(error || !data || !data.length || !document.getElementById("annstrip")) return;
+  const a = data[0], t = new Date(a.created_at).getTime();
+  if(!a.pinned && Date.now() - t > 30 * 864e5) return;
+  let seen = 0; try { seen = +localStorage.getItem("bm_ann_seen") || 0; } catch(e){}
+  const short = a.body.length > 90 ? a.body.slice(0, 90) + "…" : a.body;
+  box.innerHTML = `<button id="annb" style="display:block;width:100%;text-align:left;color:var(--ink);background:#fff;border:1.5px solid var(--acc);border-radius:14px;margin:0 0 14px"><b>📢 ${esc(a.title)}</b>${t > seen ? ` <span class="chip" style="margin:0 0 0 6px">New</span>` : ""}
+    <div class="mut" style="font-weight:400">${esc(short)}</div></button>`;
+  document.getElementById("annb").onclick = showAnnouncements;
+}
+async function showAnnouncements(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav("");
+  window.scrollTo(0, 0);
+  const staff = isStaffUser();
+  app.innerHTML = `<h1>Announcements</h1>
+    ${staff ? `<section class="card"><b>Post an announcement</b>
+      <label for="at">Title</label><input id="at" maxlength="120" placeholder="e.g. Mock exam this Saturday">
+      <label for="ab">Message</label><textarea id="ab" rows="4" maxlength="2000" placeholder="Write your announcement…"></textarea>
+      <label for="ag">Who should see it?</label><select id="ag"><option value="">Everyone</option>${ALL_GROUPS.map(g => `<option>${esc(g)}</option>`).join("")}</select>
+      <div class="ckrow"><input type="checkbox" id="ap"><label for="ap" style="margin:0">Pin to the top</label></div>
+      <button id="apost">Post announcement</button><div id="am" class="msg"></div></section>` : ""}
+    <div id="alist" class="mut">Loading…</div>`;
+  try { localStorage.setItem("bm_ann_seen", String(Date.now())); } catch(e){}
+  const load = async () => {
+    const box = document.getElementById("alist");
+    if(!box) return;
+    const { data, error } = await sb.from("announcements").select("*").order("pinned", { ascending: false }).order("created_at", { ascending: false }).limit(100);
+    if(error){ box.className = "msg err"; return box.textContent = error.message; }
+    if(!data.length){ box.className = "mut"; return box.textContent = "No announcements yet."; }
+    box.className = "";
+    box.innerHTML = data.map(a => `<section class="card ann">
+      <div>${a.pinned ? `<span class="chip">📌 Pinned</span>` : ""}<span class="chip">${a.study_group ? "For " + esc(a.study_group) : "Everyone"}</span></div>
+      <h3>${esc(a.title)}</h3><p>${esc(a.body)}</p>
+      <div class="meta">${esc(a.author_name || "Admin")} · ${new Date(a.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</div>
+      ${me.admin || a.author_id === me.user.id ? `<button class="link" data-del="${a.id}">Delete</button>` : ""}</section>`).join("");
+    box.querySelectorAll("button[data-del]").forEach(b => b.onclick = async () => {
+      if(!confirm("Delete this announcement?")) return;
+      const { error: e } = await sb.from("announcements").delete().eq("id", b.dataset.del);
+      if(e) return toast(e.message);
+      load();
+    });
+  };
+  if(staff){
+    document.getElementById("apost").onclick = async () => {
+      const am = document.getElementById("am"), title = document.getElementById("at").value.trim(), body = document.getElementById("ab").value.trim();
+      if(!title || !body){ am.className = "msg err"; return am.textContent = "Please add a title and a message."; }
+      am.className = "msg"; am.textContent = "Posting…";
+      const { error } = await sb.from("announcements").insert({ title, body, study_group: document.getElementById("ag").value || null,
+        pinned: document.getElementById("ap").checked, author_name: myName(), author_role: me.admin ? "admin" : "teacher" });
+      if(error){ am.className = "msg err"; return am.textContent = error.message; }
+      am.className = "msg ok"; am.textContent = "Posted ✅";
+      document.getElementById("at").value = ""; document.getElementById("ab").value = ""; document.getElementById("ap").checked = false;
+      load();
+    };
+  }
+  load();
+}
+function fmtT(t){
+  const m = /^(\d{1,2}):(\d{2})/.exec(t || "");
+  if(!m) return t || "";
+  let h = +m[1]; const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12;
+  return h + ":" + m[2] + " " + ap;
+}
+async function showTimetable(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav("");
+  window.scrollTo(0, 0);
+  const staff = isStaffUser();
+  let grp = ALL_GROUPS.includes(me.p.study_group) ? me.p.study_group : ALL_GROUPS[0];
+  app.innerHTML = `<h1>Timetable</h1>
+    <section class="card"><label for="tg" style="margin-top:0">Class</label><select id="tg">${ALL_GROUPS.map(g => `<option ${g === grp ? "selected" : ""}>${esc(g)}</option>`).join("")}</select></section>
+    ${staff ? `<section class="card"><b>Add to this timetable</b>
+      <label for="td">Day</label><select id="td">${DAYS.map((d, i) => `<option value="${i + 1}">${d}</option>`).join("")}</select>
+      <label for="ts">Starts</label><input id="ts" type="time" value="16:00">
+      <label for="te">Ends</label><input id="te" type="time" value="17:00">
+      <label for="tj">Subject</label><select id="tj">${SUBJECTS.map(x => `<option>${esc(x)}</option>`).join("")}</select>
+      <label for="tn">Note (optional)</label><input id="tn" maxlength="80" placeholder="e.g. Live class on the site">
+      <button id="tadd">Add to timetable</button><div id="tm" class="msg"></div></section>` : ""}
+    <div id="tlist" class="mut">Loading…</div>`;
+  const today = (new Date().getDay() + 6) % 7 + 1;
+  const load = async () => {
+    const box = document.getElementById("tlist");
+    if(!box) return;
+    box.className = "mut"; box.textContent = "Loading…";
+    const { data, error } = await sb.from("timetable").select("*").eq("study_group", grp).order("day").order("start_time");
+    if(error){ box.className = "msg err"; return box.textContent = error.message; }
+    if(!data.length){ box.className = "mut"; return box.textContent = "No timetable has been posted for " + grp + " yet."; }
+    box.className = "";
+    box.innerHTML = DAYS.map((d, i) => {
+      const rows = data.filter(r => r.day === i + 1);
+      if(!rows.length) return "";
+      return `<h2>${d}${i + 1 === today ? ` <span class="chip" style="margin:0 0 0 6px">Today</span>` : ""}</h2>` + rows.map(r => `<div class="tt ${i + 1 === today ? "today" : ""}">
+        <div class="tm">${fmtT(r.start_time)}${r.end_time ? " – " + fmtT(r.end_time) : ""}</div>
+        <div class="ti"><b>${esc(r.subject)}</b><div class="mut">${esc([r.teacher_name, r.note].filter(Boolean).join(" · "))}</div></div>
+        ${me.admin || r.created_by === me.user.id ? `<button class="link" data-del="${r.id}">Delete</button>` : ""}</div>`).join("");
+    }).join("");
+    box.querySelectorAll("button[data-del]").forEach(b => b.onclick = async () => {
+      if(!confirm("Remove this from the timetable?")) return;
+      const { error: e } = await sb.from("timetable").delete().eq("id", b.dataset.del);
+      if(e) return toast(e.message);
+      load();
+    });
+  };
+  document.getElementById("tg").onchange = e => { grp = e.target.value; load(); };
+  if(staff){
+    document.getElementById("tadd").onclick = async () => {
+      const tm = document.getElementById("tm"), st = document.getElementById("ts").value, en = document.getElementById("te").value;
+      if(!st){ tm.className = "msg err"; return tm.textContent = "Please choose a start time."; }
+      if(en && en <= st){ tm.className = "msg err"; return tm.textContent = "The end time must be after the start time."; }
+      tm.className = "msg"; tm.textContent = "Adding…";
+      const { error } = await sb.from("timetable").insert({ study_group: grp, day: +document.getElementById("td").value, start_time: st, end_time: en || null,
+        subject: document.getElementById("tj").value, teacher_name: myName(), note: document.getElementById("tn").value.trim() || null });
+      if(error){ tm.className = "msg err"; return tm.textContent = error.message; }
+      tm.className = "msg ok"; tm.textContent = "Added ✅"; document.getElementById("tn").value = "";
+      load();
+    };
+  }
+  load();
+}
+
+/* ---------- Library: past questions and teaching materials ---------- */
+const LIB_EXAMS = ["UTME", "WAEC", "NECO", "Post-UTME", "General"];
+async function showLibrary(){
+  leaveChat();
+  if(!me) return showChatGate();
+  drawSubnav(me.admin ? "practice" : "tests");
+  window.scrollTo(0, 0);
+  const staff = !!(me.admin || me.p.role === "teacher"), stu = isStudent();
+  const so = SUBJECTS.map(x => `<option>${esc(x)}</option>`).join("");
+  let cat = "past", items = [], unlocked = new Set(), balance = 0;
+  app.innerHTML = `<h1>Library</h1><div id="lbal"></div>
+    ${staff ? `<div class="tabs t" id="lcat"><button data-c="past" class="on">Past questions</button><button data-c="teaching">Teaching materials</button></div>` : ""}
+    <section class="card"><label for="lsub">Subject</label><select id="lsub"><option value="">All subjects</option>${so}</select>
+    <label for="lex">Exam</label><select id="lex"><option value="">All exams</option>${LIB_EXAMS.map(x => `<option>${x}</option>`).join("")}</select></section>
+    <div class="msg" id="m"></div><div id="llist" class="mut">Loading…</div>
+    ${staff ? `<section class="card"><h2 style="margin-top:0">Add to the library</h2>
+      <label for="lc">Type</label><select id="lc"><option value="past">Past questions (students unlock with points)</option><option value="teaching">Teaching material (free for teachers)</option></select>
+      <label for="lt">Title</label><input id="lt" placeholder="e.g. WAEC Mathematics 2022 Paper 1">
+      <label for="ls">Subject</label><select id="ls">${so}</select>
+      <div id="lpast"><label for="le">Exam</label><select id="le">${LIB_EXAMS.filter(x => x !== "General").map(x => `<option>${x}</option>`).join("")}</select>
+        <label for="ly">Year (optional)</label><input id="ly" type="number" inputmode="numeric" placeholder="2022">
+        <label for="lp">Points needed to unlock</label><input id="lp" type="number" inputmode="numeric" value="50" min="0" max="1000"></div>
+      <label for="ld">Short description (optional)</label><textarea id="ld" rows="2"></textarea>
+      <label for="lf">File (PDF, Word, image or PowerPoint, up to 25 MB)</label><input id="lf" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg">
+      <button id="lu">Upload</button><div class="msg" id="lum"></div></section>` : ""}`;
+  ptabs("library");
+  const box = document.getElementById("llist"), lsub = document.getElementById("lsub"), lex = document.getElementById("lex");
+  const draw = () => {
+    const sub = lsub.value, ex = lex.value;
+    const list = items.filter(i => i.category === cat && (!sub || i.subject === sub) && (!ex || i.exam === ex));
+    if(!list.length){ box.className = "mut"; box.textContent = "Nothing here yet. Please check back soon."; return; }
+    box.className = "";
+    box.innerHTML = list.map(i => {
+      const open = staff || i.cost === 0 || unlocked.has(i.id);
+      const costChip = i.category === "teaching" ? `<span class="chip">Free</span>` : staff ? `<span class="chip">⭐ ${i.cost} points for students</span>`
+        : i.cost === 0 ? `<span class="chip">Free</span>` : unlocked.has(i.id) ? `<span class="chip">🔓 Unlocked</span>` : `<span class="chip">⭐ ${i.cost} points</span>`;
+      return `<div class="card"><b>${esc(i.title)}</b>
+        <div><span class="chip">${esc(i.exam)}</span>${i.subject ? `<span class="chip">${esc(i.subject)}</span>` : ""}${i.year ? `<span class="chip">${i.year}</span>` : ""}${costChip}</div>
+        ${i.description ? `<p class="mut" style="margin:8px 0 0">${esc(i.description)}</p>` : ""}${i.uploader_name ? `<div class="mut">Added by ${esc(i.uploader_name)}</div>` : ""}
+        <button data-a="${open ? "get" : "unlock"}" data-id="${i.id}">${open ? "Download" : "Unlock for " + i.cost + " points"}</button>
+        ${i.uploaded_by === me.user.id || me.admin ? `<button class="del" data-a="del" data-id="${i.id}">Delete</button>` : ""}</div>`;
+    }).join("");
+    box.querySelectorAll("button[data-a]").forEach(b => b.onclick = () => act(b.dataset.a, items.find(x => x.id === b.dataset.id), b));
+  };
+  const load = async () => {
+    const [a, b, c] = await Promise.all([
+      sb.from("library_items").select("*").order("created_at", { ascending: false }),
+      stu ? sb.from("material_unlocks").select("material_id") : Promise.resolve({ data: [] }),
+      stu ? sb.rpc("get_points_balance") : Promise.resolve({ data: 0 })]);
+    if(a.error) return box.textContent = a.error.message;
+    items = a.data || []; unlocked = new Set((b.data || []).map(x => x.material_id)); balance = c.data || 0;
+    const bal = document.getElementById("lbal");
+    if(bal) bal.innerHTML = stu ? `<div class="card" style="border-color:var(--acc)"><b>⭐ ${balance} points to spend</b><div class="mut">Earn more by finishing lessons, practice, tests and mock exams.</div></div>` : "";
+    draw();
+  };
+  const act = async (a, it, btn) => {
+    if(!it) return;
+    say("");
+    if(a === "unlock"){
+      btn.disabled = true;
+      const { error } = await sb.rpc("unlock_material", { p_material: it.id });
+      if(error){ btn.disabled = false; return say(error.message, true); }
+      toast("Unlocked 🔓");
+      return load();
+    }
+    if(a === "get"){
+      btn.disabled = true;
+      const { data, error } = await sb.storage.from("library").createSignedUrl(it.file_path, 120, { download: it.file_name || true });
+      btn.disabled = false;
+      if(error) return say(error.message, true);
+      const l = document.createElement("a"); l.href = data.signedUrl; l.download = it.file_name || "material"; document.body.appendChild(l); l.click(); l.remove();
+      return;
+    }
+    if(a === "del"){
+      if(!confirm("Delete this item for everyone?")) return;
+      await sb.storage.from("library").remove([it.file_path]);
+      const { error } = await sb.from("library_items").delete().eq("id", it.id);
+      if(error) return say(error.message, true);
+      load();
+    }
+  };
+  lsub.onchange = draw; lex.onchange = draw;
+  if(staff){
+    document.querySelectorAll("#lcat button").forEach(b => b.onclick = () => {
+      cat = b.dataset.c;
+      document.querySelectorAll("#lcat button").forEach(x => x.classList.toggle("on", x === b));
+      document.getElementById("lc").value = cat; document.getElementById("lc").onchange();
+      draw();
+    });
+    document.getElementById("lc").onchange = () => { document.getElementById("lpast").classList.toggle("hide", document.getElementById("lc").value !== "past"); };
+    document.getElementById("lu").onclick = async () => {
+      const um = (t, bad) => { const el = document.getElementById("lum"); el.textContent = t; el.className = "msg " + (bad ? "err" : "ok"); };
+      const title = document.getElementById("lt").value.trim(), f = document.getElementById("lf").files[0], c2 = document.getElementById("lc").value;
+      if(!title) return um("Please enter a title.", true);
+      if(!f) return um("Please choose a file.", true);
+      if(f.size > 25 * 1024 * 1024) return um("The file is too big. The maximum is 25 MB.", true);
+      const cost = c2 === "past" ? Math.max(0, Math.min(1000, parseInt(document.getElementById("lp").value, 10) || 0)) : 0;
+      const path = me.user.id + "/" + Date.now() + "-" + f.name.replace(/[^\w.\-]+/g, "_");
+      um("Uploading…");
+      const up = await sb.storage.from("library").upload(path, f, { contentType: f.type || undefined });
+      if(up.error) return um(up.error.message, true);
+      const { error } = await sb.from("library_items").insert({ title, description: document.getElementById("ld").value.trim() || null, category: c2,
+        subject: document.getElementById("ls").value, exam: c2 === "past" ? document.getElementById("le").value : "General",
+        year: c2 === "past" && document.getElementById("ly").value ? +document.getElementById("ly").value : null, cost,
+        file_path: path, file_name: f.name, uploader_name: me.p.name || me.p.full_name || null });
+      if(error){ await sb.storage.from("library").remove([path]); return um(error.message, true); }
+      um("Uploaded ✓");
+      ["lt", "ld", "ly", "lf"].forEach(id => document.getElementById(id).value = "");
+      load();
+    };
+  }
+  load();
+}
+
+/* ---- Install as app (PWA) ---- */
+let deferredInstall = null;
+const isStandalone = () => window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferredInstall = e; });
+window.addEventListener("appinstalled", () => { deferredInstall = null; const r = document.getElementById("instrow"); if(r) r.classList.add("hide"); });
+function wireInstall(){
+  const row = document.getElementById("instrow"), btn = document.getElementById("ia"), msg = document.getElementById("instmsg");
+  if(!row || !btn || isStandalone()) return;
+  row.classList.remove("hide");
+  btn.onclick = async () => {
+    if(deferredInstall){
+      deferredInstall.prompt();
+      try { await deferredInstall.userChoice; } catch(e){}
+      deferredInstall = null;
+      return;
+    }
+    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    msg.textContent = ios
+      ? "On iPhone: open this site in Safari, tap the Share button, then tap Add to Home Screen."
+      : "On Android: tap the browser menu (three dots) and choose Install app or Add to Home screen.";
+    msg.classList.remove("hide");
+  };
+}
+if("serviceWorker" in navigator){
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+}
+
+start();
+</script>
+</body>
+</html>
